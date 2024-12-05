@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><base href="/">
+<html><head><base href="/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
@@ -650,13 +650,6 @@ p {
     margin-bottom: 15px;
 }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 15px 0;
-}
-
 .social-link {
     display: flex;
     align-items: center;
@@ -664,13 +657,31 @@ p {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--primary-color);
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease;
+}
+
+.social-link.facebook {
+    background: #1877f2; /* Facebook's brand blue */
+}
+
+.social-link.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); /* Instagram's gradient */
+}
+
+.social-link.whatsapp {
+    background: #25D366; /* WhatsApp's brand green */
 }
 
 .social-link:hover {
     transform: scale(1.1);
-    background: var(--secondary-color);
+    opacity: 0.9;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0;
 }
 
 .social-link svg {
@@ -713,7 +724,7 @@ p {
 
         <div class="products">
             <div class="product-card">
-                <h3 style="text-align: center; width: 100%; margin: 0 auto; padding: 10px; font-size: clamp(18px, 4vw, 24px);">מחשבים ניידים</h3>
+                <h3>מחשבים ניידים</h3>
                 <p>מגוון רחב של מחשבים ניידים מהמותגים המובילים</p>
             </div>
             <div class="product-card">
