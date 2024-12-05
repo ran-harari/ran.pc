@@ -50,38 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCountdown(); // Initial call
 });
 
-function togglePhoneDetails() {
-    const details = document.getElementById('phoneDetails');
-    if (details) {
-        details.classList.toggle('show');
-    }
-}
-
-function callPhone() {
-    const phoneNumber = '0505438095';
-    window.location.href = `tel:${phoneNumber}`;
-}
-
-// Add event listeners after DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Close phone details when clicking outside
-    document.addEventListener('click', function(event) {
-        const phoneIcon = document.querySelector('.phone-icon-container');
-        const phoneDetails = document.getElementById('phoneDetails');
-        
-        if (phoneIcon && phoneDetails) {
-            if (!phoneIcon.contains(event.target) && !phoneDetails.contains(event.target)) {
-                phoneDetails.classList.remove('show');
-            }
-        }
-    });
-
-    // Prevent touchmove on phone icon
-    const phoneIcon = document.querySelector('.phone-icon-container');
-    if (phoneIcon) {
-        phoneIcon.addEventListener('touchmove', function(e) {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    const phoneButton = document.querySelector('.call-icon');
+    if (phoneButton) {
+        phoneButton.addEventListener('click', function(e) {
             e.preventDefault();
-        }, { passive: false });
+            const phoneNumber = '0505438095';
+            window.location.href = `tel:${phoneNumber}`;
+        });
     }
 });
 </script>
@@ -94,6 +72,152 @@ document.addEventListener('DOMContentLoaded', function() {
     --text-color: #4a4a4a;
     --card-background: #ffffff;
     --neon-shadow: 0 0 10px rgba(30, 144, 255, 0.6);
+    --mobile-padding: 15px;
+    --container-width: min(95%, 1400px);
+}
+
+/* Typography scale adjustments */
+h1, .h1-style {
+    font-size: clamp(28px, 5vw, 36px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h2, .h2-style {
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+h3, .h3-style {
+    font-size: clamp(20px, 3.5vw, 26px);
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+p, .body-text {
+    font-size: clamp(16px, 2vw, 18px);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Container improvements */
+.content {
+    width: var(--container-width);
+    margin: 0 auto;
+    padding: var(--mobile-padding);
+}
+
+/* Responsive improvements */
+.banner-container {
+    padding: max(15px, 3vw);
+    margin: 10px auto;
+}
+
+.banner-text {
+    padding: max(15px, 2vw);
+}
+
+/* Product cards grid optimization */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(10px, 2vw, 20px);
+    padding: var(--mobile-padding);
+    width: var(--container-width);
+    margin: 0 auto;
+}
+
+.product-card {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    padding: clamp(15px, 3vw, 25px);
+}
+
+/* Icon sizing improvements */
+.social-link {
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(40px, 8vw, 60px);
+}
+
+.social-link svg {
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
+}
+
+/* Advantage items optimization */
+.advantages-container {
+    gap: clamp(8px, 2vw, 15px);
+    padding: var(--mobile-padding);
+}
+
+.advantage-item {
+    font-size: clamp(14px, 2.5vw, 16px);
+    padding: 8px 15px;
+}
+
+/* Special offer improvements */
+.special-offer {
+    padding: clamp(15px, 3vw, 25px);
+    margin: clamp(10px, 2vw, 20px) auto;
+}
+
+/* Countdown improvements */
+.countdown-container {
+    gap: clamp(8px, 2vw, 15px);
+    padding: clamp(10px, 2vw, 20px);
+}
+
+.countdown-item {
+    min-width: clamp(50px, 15vw, 70px);
+    padding: clamp(8px, 2vw, 10px);
+    font-size: clamp(16px, 3vw, 20px);
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 768px) {
+    :root {
+        --mobile-padding: 10px;
+    }
+    
+    .content {
+        padding: 10px;
+    }
+    
+    .banner-container {
+        height: 280px;
+    }
+    
+    .product-card {
+        padding: 12px;
+    }
+    
+    .advantage-item {
+        padding: 6px 12px;
+        margin: 3px;
+    }
+    
+    .countdown-item span {
+        font-size: 10px;
+    }
+}
+
+/* Small mobile optimizations */
+@media screen and (max-width: 480px) {
+    .banner-container {
+        height: 220px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700&display=swap');
@@ -235,12 +359,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 70px; 
-    padding: 10px;
+    min-width: clamp(50px, 15vw, 70px);
+    padding: clamp(8px, 2vw, 10px);
     background: var(--primary-color);
     color: white;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: clamp(16px, 3vw, 20px);
     font-weight: bold;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -272,10 +396,9 @@ body {
 }
 
 .content {
-    width: 100%;
-    max-width: 1400px;
+    width: var(--container-width);
     margin: 0 auto;
-    padding: 10px;
+    padding: var(--mobile-padding);
 }
 
 .content > * {
@@ -378,17 +501,17 @@ body {
 .special-offer {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
-    padding: 15px;
+    padding: clamp(15px, 3vw, 25px);
     border-radius: 20px;
-    margin: 10px auto;
+    margin: clamp(10px, 2vw, 20px) auto;
 }
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px;
-    padding: 20px;
-    max-width: 1400px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: clamp(10px, 2vw, 20px);
+    padding: var(--mobile-padding);
+    width: var(--container-width);
     margin: 0 auto;
 }
 
@@ -398,8 +521,9 @@ body {
     border: 1px solid rgba(30, 144, 255, 0.2);
     box-shadow: 0 0 15px rgba(30, 144, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 300px; 
-    height: 200px; 
+    width: 100%; 
+    height: auto; 
+    min-height: 180px; 
     margin: 0 auto; 
     display: flex; 
     flex-direction: column;
@@ -413,7 +537,7 @@ body {
 }
 
 .product-card h3 {
-    font-size: clamp(18px, 4vw, 24px);
+    font-size: clamp(20px, 3.5vw, 26px);
     color: var(--primary-color);
     text-shadow: var(--neon-shadow);
     margin-bottom: 15px;
@@ -421,7 +545,7 @@ body {
 }
 
 .product-card p {
-    font-size: 1rem;
+    font-size: clamp(16px, 2vw, 18px);
     color: var(--text-color);
     text-align: center;
     margin-bottom: 5px;
@@ -435,49 +559,39 @@ body {
     box-shadow: 0 15px 40px rgba(0,0,0,0.1);
 }
 
-.phone-button {
+.call-icon {
+    position: fixed;
+    bottom: 20px;
+    left: auto;
+    right: 20px;
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
     background-color: var(--primary-color);
-    color: var(--card-background);
-    padding: 20px 30px;
-    border-radius: 50px;
-    font-size: clamp(24px, 5vw, 32px);
+    color: white;
+    border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 15px;
-    min-width: min(90%, 300px);
-    margin: 20px auto;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.phone-button:hover {
-    background-color: var(--secondary-color);
-}
-
-.phone-button .icon {
-    order: 1; 
-    font-size: 32px;
-    display: flex;
     align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 2s infinite;
 }
 
-@media screen and (max-width: 768px) {
-    .phone-button {
-        font-size: 22px;
-        padding: 15px 25px;
-        width: 100%;
-    }
-    
-    .product-card {
-        width: 100%; 
-        height: 180px; 
-        padding: 15px;
-    }
-    
-    .products {
-        grid-template-columns: 1fr; 
+.call-icon:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .call-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+        right: 15px;
+        bottom: 15px;
     }
 }
 
@@ -513,8 +627,8 @@ body {
 }
 
 .social-link {
-    width: clamp(45px, 8vw, 60px);
-    height: clamp(45px, 8vw, 60px);
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(40px, 8vw, 60px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -581,8 +695,8 @@ body {
 }
 
 .social-link svg {
-    width: clamp(22px, 4vw, 30px);
-    height: clamp(22px, 4vw, 30px);
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
     transition: transform 0.2s ease;
 }
 
@@ -658,38 +772,6 @@ img {
     height: auto;
     display: block;
     margin: 0 auto;
-}
-
-.phone-icon-container {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;  
-    z-index: 1000;
-    cursor: pointer;
-}
-
-.phone-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    animation: pulse 2s infinite;
-}
-
-.phone-icon:hover {
-    transform: scale(1.1);
-    background: var(--secondary-color);
-}
-
-.phone-icon svg {
-    width: 30px;
-    height: 30px;
-    fill: white;
 }
 
 .phone-details {
@@ -794,8 +876,8 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    padding: 1rem;
+    gap: clamp(8px, 2vw, 15px);
+    padding: var(--mobile-padding);
     margin: 0 auto;
     max-width: 1400px; 
     width: 100%;
@@ -805,8 +887,8 @@ html {
     flex: 0 1 auto;
     font-weight: bold;
     color: var(--primary-color);
-    font-size: 1.1em;
-    padding: 12px 20px;
+    font-size: clamp(14px, 2.5vw, 16px);
+    padding: 8px 15px;
     background-color: var(--card-background);
     border: 1px solid var(--primary-color);
     text-shadow: var(--neon-shadow);
@@ -825,12 +907,12 @@ html {
 
 p {
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: clamp(16px, 2vw, 18px);
 }
 
 .social-link svg {
-    width: 30px;
-    height: 30px;
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
     display: block;
 }
 
@@ -948,17 +1030,10 @@ p {
     </div>
 </div>
 
-<div class="phone-icon-container" onclick="togglePhoneDetails()">
-    <div class="phone-icon">
-        <svg viewBox="0 0 24 24">
-            <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
-        </svg>
-    </div>
-</div>
-
-<div id="phoneDetails" class="phone-details">
-    <p>לפרטים והזמנות התקשר עכשיו!</p>
-    <button onclick="callPhone()">התקשר אלינו</button>
+<div class="call-icon" onclick="window.location.href='tel:0505438095';">
+    <svg viewBox="0 0 24 24" width="30" height="30">
+        <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+    </svg>
 </div>
 
 <footer class="footer">
@@ -982,33 +1057,7 @@ function addEvent(element, event, handler) {
     }
 }
 
-function handlePhoneClick(event) {
-    event.preventDefault();
-    const phoneNumber = '0505438095';
-    
-    window.location.href = `tel:${phoneNumber}`;
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    const phoneButton = document.querySelector('.phone-button');
-    if (phoneButton) {
-        phoneButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            const phoneNumber = '0505438095';
-            window.location.href = `tel:${phoneNumber}`;
-        });
-        
-        phoneButton.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.95)';
-        });
-        
-        phoneButton.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    }
-
     const socialLinks = document.querySelectorAll('.social-link');
     
     socialLinks.forEach(link => {
