@@ -1,4 +1,4 @@
-<html><head><base href="/">
+<!DOCTYPE html><html><head><base href="/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
@@ -151,76 +151,130 @@ p, .body-text {
     padding: max(15px, 2vw);
 }
 
+/* Product cards grid optimization */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(10px, 2vw, 20px);
+    padding: var(--mobile-padding);
+    width: var(--container-width);
+    margin: 0 auto;
+}
+
+.product-card {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    padding: clamp(15px, 3vw, 25px);
+}
+
+/* Icon sizing improvements */
+.social-link {
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(40px, 8vw, 60px);
+}
+
+.social-link svg {
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
+}
+
+/* Advantage items optimization */
+.advantages-container {
+    gap: clamp(8px, 2vw, 15px);
+    padding: var(--mobile-padding);
+}
+
+.advantage-item {
+    font-size: clamp(14px, 2.5vw, 16px);
+    padding: 8px 15px;
+}
+
 /* Countdown styles */
 .countdown-container {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin: 20px auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
-    animation: fadeIn 1s ease-out;
-    direction: rtl;
+    gap: 10px; /* Reduced from 15px */
+    padding: 15px; /* Reduced from 20px */
 }
 
 .countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: clamp(70px, 15vw, 100px);
-    padding: clamp(10px, 2vw, 15px);
-    background: var(--primary-color);
-    color: white;
-    border-radius: 12px;
-    font-size: clamp(24px, 4vw, 36px);
-    font-weight: bold;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    animation: pulse 1s infinite;
+    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
+    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
+    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
 }
 
 .countdown-item span {
-    font-size: clamp(14px, 2vw, 18px);
-    margin-top: 5px;
+    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
 }
 
-/* Mobile specific adjustments */
+/* Mobile optimizations */
 @media screen and (max-width: 768px) {
+    :root {
+        --mobile-padding: 10px;
+    }
+    
+    .content {
+        padding: 10px;
+    }
+    
+    .banner-container {
+        height: 280px;
+    }
+    
+    .product-card {
+        padding: 12px;
+    }
+    
+    .advantage-item {
+        padding: 6px 12px;
+        margin: 3px;
+    }
+
     .countdown-container {
-        gap: 10px;
-        padding: 15px;
+        gap: 4px; /* Reduced from 5px */
+        padding: 8px; /* Reduced from 10px */
     }
     
     .countdown-item {
-        font-size: clamp(20px, 5vw, 28px);
-        min-width: 60px;
-        padding: 8px;
+        font-size: 13px; /* Reduced from 14px */
+        min-width: 45px; /* Reduced from 50px */
+        max-width: 70px; /* Reduced from 80px */
+        padding: 5px; /* Reduced from 6px */
     }
     
     .countdown-item span {
-        font-size: clamp(12px, 2vw, 14px);
+        font-size: 7px; /* Reduced from 8px */
     }
 }
 
 @media screen and (max-width: 480px) {
+    .banner-container {
+        height: 220px;
+    }
+    
+    .social-link {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .social-link svg {
+        width: 18px;
+        height: 18px;
+    }
+    
     .countdown-container {
-        gap: 8px;
-        padding: 12px;
+        gap: 3px; /* Reduced from 4px */
+        padding: 6px; /* Reduced from 8px */
     }
     
     .countdown-item {
-        font-size: clamp(18px, 4vw, 24px);
-        min-width: 50px;
-        padding: 6px;
+        font-size: 12px;
+        min-width: 40px;
+        max-width: 65px;
+        padding: 4px;
     }
     
     .countdown-item span {
-        font-size: clamp(10px, 1.5vw, 12px);
+        font-size: 6px;
     }
 }
 
@@ -354,29 +408,112 @@ body {
     padding: 10px 20px;
     background: rgba(0,0,0,0.2);
     border-radius: 15px;
+    backdrop-filter: blur(5px);
 }
 
-/* Mobile optimizations */
+.countdown-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Reduced from 15px */
+    flex-wrap: wrap;
+    margin: 20px auto;
+    padding: 15px; /* Reduced from 20px */
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1s ease-out;
+    direction: rtl;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
+    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
+    background: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 1s infinite;
+}
+
+.countdown-item span {
+    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
+}
+
+.countdown-ended {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000;
+    text-align: center;
+    margin-top: 20px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content > * {
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: clamp(28px, 6vw, 42px);
+    color: var(--primary-color);
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
 @media screen and (max-width: 768px) {
-    :root {
-        --mobile-padding: 10px;
+    .content > * {
+        margin-bottom: 20px;
     }
     
-    .content {
-        padding: 10px;
+    .section-title {
+        margin: 30px 0 15px;
     }
     
     .banner-container {
-        height: 280px;
+        height: 250px;
+        padding: 15px;
     }
-    
+
+    .banner-text {
+        padding: 15px;
+    }
+
+    .banner-title {
+        margin-bottom: 10px;
+    }
+
+    .banner-dates {
+        padding: 8px 15px;
+        margin-top: 10px;
+    }
+
     .product-card {
-        padding: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 8px var(--shadow-color);
     }
-    
-    .advantage-item {
-        padding: 6px 12px;
-        margin: 3px;
+
+    .advantages-container {
+        flex-direction: row;
+        justify-content: center;
+        padding: 0.5rem;
+        gap: 8px;
     }
 
     .countdown-container {
@@ -398,19 +535,17 @@ body {
 
 @media screen and (max-width: 480px) {
     .banner-container {
-        height: 220px;
+        height: 200px;
     }
     
-    .social-link {
-        width: clamp(45px, 9vw, 65px); /* Increased from 40px, 8vw, 60px */
-        height: clamp(45px, 9vw, 65px); /* Increased from 40px, 8vw, 60px */
+    .banner-text {
+        padding: 10px;
+    }
+    
+    .banner-dates {
+        padding: 6px 12px;
     }
 
-    .social-link svg {
-        width: 22px; /* Increased from 18px */
-        height: 22px; /* Increased from 18px */
-    }
-    
     .countdown-container {
         gap: 3px; /* Reduced from 4px */
         padding: 6px; /* Reduced from 8px */
@@ -428,7 +563,6 @@ body {
     }
 }
 
-/* Special offer styles */
 .special-offer {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
@@ -558,8 +692,8 @@ body {
 }
 
 .social-link {
-    width: clamp(45px, 9vw, 65px); /* Increased from 40px, 8vw, 60px */
-    height: clamp(45px, 9vw, 65px); /* Increased from 40px, 8vw, 60px */
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(40px, 8vw, 60px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -626,8 +760,8 @@ body {
 }
 
 .social-link svg {
-    width: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    height: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
     transition: transform 0.2s ease;
 }
 
@@ -642,21 +776,24 @@ body {
 }
 
 @media screen and (max-width: 360px) {
+    .social-icons {
+        gap: 10px;
+    }
+    
     .social-link {
-        width: 45px; /* Increased from 40px */
-        height: 45px; /* Increased from 40px */
+        width: 40px;
+        height: 40px;
     }
     
     .social-link svg {
-        width: 25px; /* Increased from 20px */
-        height: 25px; /* Increased from 20px */
+        width: 20px;
+        height: 20px;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .social-link svg {
-        width: 22px; /* Increased from 18px */
-        height: 22px; /* Increased from 18px */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .social-link {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 }
 
@@ -839,27 +976,13 @@ p {
 }
 
 .social-link svg {
-    width: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    height: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    transition: transform 0.2s ease;
+    width: clamp(20px, 5vw, 30px);
+    height: clamp(20px, 5vw, 30px);
+    display: block;
 }
 
-.social-link svg {
-    width: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    height: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    transition: transform 0.2s ease;
-}
-
-.social-link svg {
-    width: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    height: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    transition: transform 0.2s ease;
-}
-
-.social-link svg {
-    width: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    height: clamp(25px, 6vw, 35px); /* Increased from 20px, 5vw, 30px */
-    transition: transform 0.2s ease;
+.social-link svg path {
+    fill: #FFFFFF;
 }
 </style>
 </head>
