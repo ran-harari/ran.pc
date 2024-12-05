@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><base href="/">
+<html><head><base href="/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
@@ -190,6 +190,22 @@ p, .body-text {
     padding: 8px 15px;
 }
 
+/* Countdown styles */
+.countdown-container {
+    gap: 10px; /* Reduced from 15px */
+    padding: 15px; /* Reduced from 20px */
+}
+
+.countdown-item {
+    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
+    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
+    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
+}
+
+.countdown-item span {
+    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
+}
+
 /* Mobile optimizations */
 @media screen and (max-width: 768px) {
     :root {
@@ -212,9 +228,24 @@ p, .body-text {
         padding: 6px 12px;
         margin: 3px;
     }
+
+    .countdown-container {
+        gap: 4px; /* Reduced from 5px */
+        padding: 8px; /* Reduced from 10px */
+    }
+    
+    .countdown-item {
+        font-size: 13px; /* Reduced from 14px */
+        min-width: 45px; /* Reduced from 50px */
+        max-width: 70px; /* Reduced from 80px */
+        padding: 5px; /* Reduced from 6px */
+    }
+    
+    .countdown-item span {
+        font-size: 7px; /* Reduced from 8px */
+    }
 }
 
-/* Small mobile optimizations */
 @media screen and (max-width: 480px) {
     .banner-container {
         height: 220px;
@@ -228,6 +259,22 @@ p, .body-text {
     .social-link svg {
         width: 18px;
         height: 18px;
+    }
+    
+    .countdown-container {
+        gap: 3px; /* Reduced from 4px */
+        padding: 6px; /* Reduced from 8px */
+    }
+    
+    .countdown-item {
+        font-size: 12px;
+        min-width: 40px;
+        max-width: 65px;
+        padding: 4px;
+    }
+    
+    .countdown-item span {
+        font-size: 6px;
     }
 }
 
@@ -369,10 +416,10 @@ body {
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px; /* Reduced from 15px */
     flex-wrap: wrap;
     margin: 20px auto;
-    padding: 20px;
+    padding: 15px; /* Reduced from 20px */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     backdrop-filter: blur(5px);
@@ -384,12 +431,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: clamp(50px, 15vw, 70px);
-    padding: clamp(8px, 2vw, 10px);
+    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
+    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
     background: var(--primary-color);
     color: white;
     border-radius: 10px;
-    font-size: clamp(16px, 3vw, 20px);
+    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
     font-weight: bold;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -397,8 +444,7 @@ body {
 }
 
 .countdown-item span {
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
 }
 
 .countdown-ended {
@@ -471,19 +517,19 @@ body {
     }
 
     .countdown-container {
-        gap: 5px;
-        padding: 10px;
+        gap: 4px; /* Reduced from 5px */
+        padding: 8px; /* Reduced from 10px */
     }
-
+    
     .countdown-item {
-        font-size: 14px;
-        min-width: 50px;
-        max-width: 80px;
-        padding: 6px;
+        font-size: 13px; /* Reduced from 14px */
+        min-width: 45px; /* Reduced from 50px */
+        max-width: 70px; /* Reduced from 80px */
+        padding: 5px; /* Reduced from 6px */
     }
-
+    
     .countdown-item span {
-        font-size: 8px;
+        font-size: 7px; /* Reduced from 8px */
     }
 }
 
@@ -501,19 +547,19 @@ body {
     }
 
     .countdown-container {
-        gap: 5px;
-        padding: 10px;
+        gap: 3px; /* Reduced from 4px */
+        padding: 6px; /* Reduced from 8px */
     }
-
+    
     .countdown-item {
-        font-size: 14px;
-        min-width: 50px;
-        max-width: 80px;
-        padding: 6px;
+        font-size: 12px;
+        min-width: 40px;
+        max-width: 65px;
+        padding: 4px;
     }
-
+    
     .countdown-item span {
-        font-size: 8px;
+        font-size: 6px;
     }
 }
 
@@ -965,12 +1011,12 @@ p {
             </div>
         </div>
 
-        <h1 style="color: var(--primary-color); margin-bottom: 30px; text-align: center; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 42px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">רן מחשבים פתרונות מחשוב מתקדמים</h1>
+        <h1 style="color: var(--primary-color); margin-bottom: 30px; text-align: center; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: clamp(28px, 5vw, 38px); font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">רן מחשבים פתרונות מחשוב מתקדמים</h1>
         <p style="text-align: center; font-size: 1.4rem !important; color: #34a853; font-weight: 600; margin-bottom: 15px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);"></p>
 
-        <p style="text-align: center; font-size: 1.2rem !important; color: #1e90ff; font-weight: 600; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.08), rgba(30, 144, 255, 0.08)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
+        <p style="text-align: center; font-size: clamp(1.3rem, 2.5vw, 1.5rem) !important; color: #1e90ff; font-weight: 600; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.08), rgba(30, 144, 255, 0.08)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
 
-        <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
+        <div class="section-title" style="text-align: center; font-size: clamp(28px, 5vw, 36px); color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
 
         <div class="products">
             <div class="product-card">
