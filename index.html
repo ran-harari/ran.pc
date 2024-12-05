@@ -1,95 +1,4 @@
-<html><head><base href="/">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#4CAF50">
-<script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
-<script type="text/javascript">
-const endDate = new Date('2024-12-31T23:59:59').getTime();
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const timeLeft = endDate - now;
-
-    // If time has expired
-    if (timeLeft <= 0) {
-        clearInterval(countdownInterval);
-        const countdownElement = document.getElementById('countdown');
-        if (countdownElement) {
-            countdownElement.innerHTML = `
-                <div class="countdown-ended">המבצע הסתיים! תודה על ההתעניינות.</div>
-            `;
-        }
-        return;
-    }
-
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    document.getElementById('countdown').innerHTML = `
-        <div class="countdown-item">${days}<span>ימים</span></div>
-        <div class="countdown-item">${hours}<span>שעות</span></div>
-        <div class="countdown-item">${minutes}<span>דקות</span></div>
-        <div class="countdown-item">${seconds}<span>שניות</span></div>
-    `;
-}
-
-// Wrap the initialization in DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Start the timer
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.documentElement.style.scrollBehavior = 'smooth';
-});
-</script>
-<script src="https://www.negishim.com/accessibility/accessibility_pro.js" type="text/javascript"></script>
-<style>
-:root {
-    --primary-color: #1e90ff;
-    --secondary-color: #ff7f50;
-    --background-color: #f9f9f9;
-    --text-color: #4a4a4a;
-    --card-background: #ffffff;
-    --neon-shadow: 0 0 10px rgba(30, 144, 255, 0.6);
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700&display=swap');
-
-body {
-    direction: rtl;
-    margin: 0;
-    padding: 20px;
-    overflow-x: hidden;
-    width: 100%;
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
-}
-
-.header {
-    background-color: #fff;
-  <html><head><base href="/">
+<!DOCTYPE html><html><head><base href="/">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
@@ -800,7 +709,7 @@ p {
 
         <p style="text-align: center; font-size: 1.3rem !important; color: #34a853; font-weight: 500; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.05), rgba(52, 168, 83, 0.05)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
 
-        <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
+        <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 0 15px;">המוצרים שלנו</div>
 
         <div class="products">
             <div class="product-card">
@@ -881,7 +790,7 @@ p {
 
 <div class="call-icon" onclick="window.location.href='tel:0505438095';">
     <svg viewBox="0 0 24 24" width="30" height="30">
-        <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"></path>
     </svg>
 </div>
 
