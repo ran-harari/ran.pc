@@ -35,19 +35,24 @@ function updateCountdown() {
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-    document.getElementById('countdown').innerHTML = `
-        <div class="countdown-item">${days}<span>ימים</span></div>
-        <div class="countdown-item">${hours}<span>שעות</span></div>
-        <div class="countdown-item">${minutes}<span>דקות</span></div>
-        <div class="countdown-item">${seconds}<span>שניות</span></div>
-    `;
+    const countdownElement = document.getElementById('countdown');
+    if (countdownElement) {
+        countdownElement.innerHTML = `
+            <div class="countdown-item">${days}<span>ימים</span></div>
+            <div class="countdown-item">${hours}<span>שעות</span></div>
+            <div class="countdown-item">${minutes}<span>דקות</span></div>
+            <div class="countdown-item">${seconds}<span>שניות</span></div>
+        `;
+    }
 }
 
-// Wrap the initialization in DOMContentLoaded
+// Wrap initialization in DOMContentLoaded and add error handling
 document.addEventListener('DOMContentLoaded', function() {
-    // Start the timer
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
+    const countdownElement = document.getElementById('countdown');
+    if (countdownElement) {
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -208,18 +213,20 @@ body {
     backdrop-filter: blur(5px);
     animation: fadeIn 1s ease-out;
     direction: rtl;
+    width: 90%; /* Added to control width */
+    max-width: 600px; /* Added max-width */
 }
 
 .countdown-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 70px; 
-    padding: 10px;
+    min-width: 60px; /* Reduced from 70px */
+    padding: 8px; /* Reduced from 10px */
     background: var(--primary-color);
     color: white;
-    border-radius: 10px;
-    font-size: 20px;
+    border-radius: 8px;
+    font-size: clamp(16px, 4vw, 20px); /* Responsive font size */
     font-weight: bold;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -227,8 +234,8 @@ body {
 }
 
 .countdown-item span {
-    font-size: 12px;
-    margin-top: 5px;
+    font-size: clamp(10px, 2.5vw, 12px); /* Responsive font size */
+    margin-top: 4px;
 }
 
 .countdown-ended {
@@ -321,6 +328,7 @@ h3 {
     .banner-dates {
         padding: 8px 15px;
         margin-top: 10px;
+        font-size: clamp(18px, 4vw, 22px); /* More responsive font size */
     }
 
     .product-card {
@@ -336,17 +344,16 @@ h3 {
     }
 
     .countdown-container {
-        gap: 5px;
-        padding: 10px;
+        gap: 8px;
+        padding: 15px;
+        width: 95%;
     }
 
     .countdown-item {
-        font-size: 14px;
         min-width: 50px;
-        max-width: 80px;
         padding: 6px;
     }
-
+    
     .countdown-item span {
         font-size: 8px;
     }
@@ -382,8 +389,13 @@ h3 {
     }
 
     .countdown-container {
-        gap: 8px;
         padding: 10px;
+        gap: 6px;
+    }
+
+    .countdown-item {
+        min-width: 45px;
+        padding: 5px;
     }
 }
 
@@ -629,7 +641,9 @@ html {
     }
     
     .banner-dates {
-        font-size: 22px;
+        font-size: clamp(18px, 4vw, 22px); /* More responsive font size */
+        padding: 8px 12px;
+        margin-top: 8px;
     }
 }
 
