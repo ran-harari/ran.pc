@@ -151,130 +151,76 @@ p, .body-text {
     padding: max(15px, 2vw);
 }
 
-/* Product cards grid optimization */
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(10px, 2vw, 20px);
-    padding: var(--mobile-padding);
-    width: var(--container-width);
-    margin: 0 auto;
-}
-
-.product-card {
-    width: 100%;
-    height: auto;
-    min-height: 180px;
-    padding: clamp(15px, 3vw, 25px);
-}
-
-/* Icon sizing improvements */
-.social-link {
-    width: clamp(40px, 8vw, 60px);
-    height: clamp(40px, 8vw, 60px);
-}
-
-.social-link svg {
-    width: clamp(20px, 5vw, 30px);
-    height: clamp(20px, 5vw, 30px);
-}
-
-/* Advantage items optimization */
-.advantages-container {
-    gap: clamp(8px, 2vw, 15px);
-    padding: var(--mobile-padding);
-}
-
-.advantage-item {
-    font-size: clamp(14px, 2.5vw, 16px);
-    padding: 8px 15px;
-}
-
 /* Countdown styles */
 .countdown-container {
-    gap: 10px; /* Reduced from 15px */
-    padding: 15px; /* Reduced from 20px */
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 1s ease-out;
+    direction: rtl;
 }
 
 .countdown-item {
-    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
-    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
-    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: clamp(70px, 15vw, 100px);
+    padding: clamp(10px, 2vw, 15px);
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: pulse 1s infinite;
 }
 
 .countdown-item span {
-    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
+    font-size: clamp(14px, 2vw, 18px);
+    margin-top: 5px;
 }
 
-/* Mobile optimizations */
+/* Mobile specific adjustments */
 @media screen and (max-width: 768px) {
-    :root {
-        --mobile-padding: 10px;
-    }
-    
-    .content {
-        padding: 10px;
-    }
-    
-    .banner-container {
-        height: 280px;
-    }
-    
-    .product-card {
-        padding: 12px;
-    }
-    
-    .advantage-item {
-        padding: 6px 12px;
-        margin: 3px;
-    }
-
     .countdown-container {
-        gap: 4px; /* Reduced from 5px */
-        padding: 8px; /* Reduced from 10px */
+        gap: 10px;
+        padding: 15px;
     }
     
     .countdown-item {
-        font-size: 13px; /* Reduced from 14px */
-        min-width: 45px; /* Reduced from 50px */
-        max-width: 70px; /* Reduced from 80px */
-        padding: 5px; /* Reduced from 6px */
+        font-size: clamp(20px, 5vw, 28px);
+        min-width: 60px;
+        padding: 8px;
     }
     
     .countdown-item span {
-        font-size: 7px; /* Reduced from 8px */
+        font-size: clamp(12px, 2vw, 14px);
     }
 }
 
 @media screen and (max-width: 480px) {
-    .banner-container {
-        height: 220px;
-    }
-    
-    .social-link {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .social-link svg {
-        width: 18px;
-        height: 18px;
-    }
-    
     .countdown-container {
-        gap: 3px; /* Reduced from 4px */
-        padding: 6px; /* Reduced from 8px */
+        gap: 8px;
+        padding: 12px;
     }
     
     .countdown-item {
-        font-size: 12px;
-        min-width: 40px;
-        max-width: 65px;
-        padding: 4px;
+        font-size: clamp(18px, 4vw, 24px);
+        min-width: 50px;
+        padding: 6px;
     }
     
     .countdown-item span {
-        font-size: 6px;
+        font-size: clamp(10px, 1.5vw, 12px);
     }
 }
 
@@ -411,109 +357,27 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.countdown-container {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Reduced from 15px */
-    flex-wrap: wrap;
-    margin: 20px auto;
-    padding: 15px; /* Reduced from 20px */
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
-    animation: fadeIn 1s ease-out;
-    direction: rtl;
-}
-
-.countdown-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: clamp(45px, 12vw, 60px); /* Reduced from clamp(50px, 15vw, 70px) */
-    padding: clamp(6px, 1.5vw, 8px); /* Reduced from clamp(8px, 2vw, 10px) */
-    background: var(--primary-color);
-    color: white;
-    border-radius: 10px;
-    font-size: clamp(14px, 2.5vw, 18px); /* Reduced from clamp(16px, 3vw, 20px) */
-    font-weight: bold;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    animation: pulse 1s infinite;
-}
-
-.countdown-item span {
-    font-size: clamp(10px, 1.5vw, 12px); /* Reduced from 12px */
-}
-
-.countdown-ended {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff0000;
-    text-align: center;
-    margin-top: 20px;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.content > * {
-    margin-bottom: 30px;
-}
-
-.section-title {
-    font-size: clamp(28px, 6vw, 42px);
-    color: var(--primary-color);
-    text-align: center;
-    margin: 40px 0 20px;
-}
-
+/* Mobile optimizations */
 @media screen and (max-width: 768px) {
-    .content > * {
-        margin-bottom: 20px;
+    :root {
+        --mobile-padding: 10px;
     }
     
-    .section-title {
-        margin: 30px 0 15px;
+    .content {
+        padding: 10px;
     }
     
     .banner-container {
-        height: 250px;
-        padding: 15px;
+        height: 280px;
     }
-
-    .banner-text {
-        padding: 15px;
-    }
-
-    .banner-title {
-        margin-bottom: 10px;
-    }
-
-    .banner-dates {
-        padding: 8px 15px;
-        margin-top: 10px;
-    }
-
+    
     .product-card {
-        padding: 15px;
-        box-shadow: 0 4px 8px var(--shadow-color);
+        padding: 12px;
     }
-
-    .advantages-container {
-        flex-direction: row;
-        justify-content: center;
-        padding: 0.5rem;
-        gap: 8px;
+    
+    .advantage-item {
+        padding: 6px 12px;
+        margin: 3px;
     }
 
     .countdown-container {
@@ -535,17 +399,19 @@ body {
 
 @media screen and (max-width: 480px) {
     .banner-container {
-        height: 200px;
+        height: 220px;
     }
     
-    .banner-text {
-        padding: 10px;
+    .social-link {
+        width: 35px;
+        height: 35px;
     }
     
-    .banner-dates {
-        padding: 6px 12px;
+    .social-link svg {
+        width: 18px;
+        height: 18px;
     }
-
+    
     .countdown-container {
         gap: 3px; /* Reduced from 4px */
         padding: 6px; /* Reduced from 8px */
@@ -563,6 +429,7 @@ body {
     }
 }
 
+/* Special offer styles */
 .special-offer {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     color: white;
@@ -1071,7 +938,7 @@ p {
             <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">עד גמר המלאי | ט.ל.ח</p>
         </div>
         <div class="social-section" role="complementary" aria-label="Social Media Links">
-            <h2 class="follow-title">עקבו אחרינו</h2>
+            <h2 class="follow-title" style="font-size: clamp(24px, 4vw, 32px); margin: 25px 0 15px;">עקבו אחרינו</h2>
             <div class="social-icons">
                 <a href="https://www.facebook.com/ran.harari" class="social-link facebook" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" width="30" height="30">
