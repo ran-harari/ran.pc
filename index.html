@@ -84,6 +84,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }, { passive: false });
     }
 });
+
+// New functions added as per the plan
+function toggleChat() {
+    const chatWidget = document.getElementById('chatWidget');
+    if (chatWidget) {
+        // Toggle display
+        if (chatWidget.style.display === 'flex') {
+            chatWidget.style.display = 'none';
+        } else {
+            chatWidget.style.display = 'flex';
+            // Focus on input when chat is opened
+            const userInput = document.getElementById('userInput');
+            if (userInput) {
+                userInput.focus();
+            }
+        }
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendMessage();
+    }
+}
 </script>
 <script src="https://www.negishim.com/accessibility/accessibility_pro.js" type="text/javascript"></script>
 <style>
