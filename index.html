@@ -1109,11 +1109,191 @@ function addEvent(element, event, handler) {
     }
 }
 
-function handlePhoneClick(event) {
-    event.preventDefault();
-    const phoneNumber = '0505438095';
+const botResponses = {
+    "שלום": "היי! איך אפשר לעזור לך היום?",
+    "מחיר": "המחירים שלנו מתחילים מ-1500 ₪. אשמח לתת לך הצעת מחיר מותאמת אישית לצרכים שלך!",
+    "משלוח": "אנחנו מספקים משלוח חינם בקנייה מעל 2000 ₪. זמן האספקה הוא עד 3 ימי עסקים.",
+    "אחריות": "כל המוצרים שלנו מגיעים עם אחריות מלאה לשנה. ניתן להרחיב את האחריות בתשלום.",
+    "מחשב נייד": "יש לנו מגוון רחב של מחשבים ניידים ממיטב המותגים כמו Dell, ASUS, Lenovo ו-HP. לאיזה שימוש אתה צריך את המחשב?",
+    "גיימינג": "אנחנו מתמחים במחשבי גיימינג עם כרטיסי מסך מתקדמים כמו NVIDIA RTX. מה התקציב שלך?",
+    "מבצעים": "יש לנו מבצעי סוף שנה מטורפים עד ה-31.12! כולל הנחות משמעותיות על מחשבים ניידים ונייחים.",
+    "default": "תודה על פנייתך! אשמח לסייע. האם תוכל לפרט יותר את השאלה שלך?"
+};
+
+// Upgrade the sendMessage function to use AI for more dynamic responses
+async function sendMessage() {
+    const userInput = document.getElementById('userInput');
+    const message = userInput.value.trim();
     
-    window.location.href = `tel:${phoneNumber}`;
+    if (!message) return;
+    
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Add user message with enhanced styling
+    chatMessages.innerHTML += `
+        <div class="message user-message" style="animation: slideIn 0.3s ease-out">
+            ${message}
+        </div>`;
+    
+    // Clear input
+    userInput.value = '';
+    
+    // Show typing indicator
+    chatMessages.innerHTML += `
+        <div class="message bot-message typing" id="typingIndicator">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>`;
+    
+    // Get AI response
+    let response;
+    try {
+        response = await getAIResponse(message);
+    } catch (error) {
+        console.error('Error getting AI response:', error);
+        response = botResponses.default;
+    }
+    
+    // Remove typing indicator and add bot response
+    const typingIndicator = document.getElementById('typingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+    
+    // Add bot response with animation
+    chatMessages.innerHTML += `
+        <div class="message bot-message" style="animation: slideIn 0.3s ease-out">
+            ${response}
+        </div>`;
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Add CSS for enhanced chat experience
+const newStyles = `
+    .message {
+        max-width: 80%;
+        padding: 12px 15px;
+        border-radius: 15px;
+        margin: 8px 0;
+        opacity: 0;
+        animation: fadeIn 0.3s forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateX(20px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    .typing {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 12px 20px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        background: #777;
+        border-radius: 50%;
+        animation: bounce 1s infinite;
+    }
+
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+    .chat-widget {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .chat-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    .chat-input input {
+        border: 2px solid #eee;
+        border-radius: 20px;
+        padding: 12px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .chat-input input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
+    }
+
+    .chat-input button {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 12px 25px;
+        border-radius: 20px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .chat-input button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(30, 144, 255, 0.2);
+    }
+`;
+
+// Add the new styles to the page
+const styleSheet = document.createElement("style");
+styleSheet.textContent = newStyles;
+document.head.appendChild(styleSheet);
+
+// Improve AI response function with more context awareness
+async function getAIResponse(message) {
+    try {
+        const response = await fetch('/api/ai_completion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: `As a computer store customer service agent, provide a helpful response in Hebrew to: "${message}"
+                Consider the context that we are a computer store selling laptops, desktops, and peripherals.
+                Make the response friendly, professional, and concise.
+                
+                <typescript-interface>
+                interface Response {
+                    reply: string;
+                }
+                </typescript-interface>
+                
+                <example-response>
+                {
+                    "reply": "אשמח לעזור! המחשבים הניידים שלנו מתחילים מ-2000 ש״ח כולל אחריות לשנה."
+                }
+                </example-response>`,
+                data: {
+                    message,
+                    context: "computer_store"
+                }
+            }),
+        });
+        
+        const data = await response.json();
+        return data.reply;
+    } catch (error) {
+        console.error('Error:', error);
+        return botResponses.default;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1192,90 +1372,5 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelectorAll('.product-card').forEach((card, index) => {
     card.style.animationDelay = `${index * 0.05}s`;
 });
-
-// Chat functionality
-const botResponses = {
-    "שלום": "היי! איך אפשר לעזור לך היום?",
-    "מחיר": "המחירים שלנו מתחילים מ-1500 ₪. נשמח לתת לך הצעת מחיר מותאמת אישית!",
-    "משלוח": "אנחנו מספקים משלוח חינם בקנייה מעל 2000 ₪",
-    "אחריות": "כל המוצרים שלנו מגיעים עם אחריות מלאה לשנה",
-    "default": "תודה על פנייתך! נציג שלנו יחזור אליך בהקדם. לחלופין, תוכל להתקשר אלינו ב-0505438095"
-};
-
-function toggleChat() {
-    const chatWidget = document.getElementById('chatWidget');
-    chatWidget.style.display = chatWidget.style.display === 'flex' ? 'none' : 'flex';
-}
-
-async function sendMessage() {
-    const userInput = document.getElementById('userInput');
-    const message = userInput.value.trim();
-    
-    if (!message) return;
-    
-    const chatMessages = document.getElementById('chatMessages');
-    
-    // Add user message
-    chatMessages.innerHTML += `<div class="message user-message">${message}</div>`;
-    
-    // Clear input
-    userInput.value = '';
-    
-    // Get bot response
-    let response;
-    try {
-        response = await getAIResponse(message);
-    } catch (error) {
-        console.error('Error getting AI response:', error);
-        response = botResponses.default;
-    }
-    
-    // Add bot response with delay
-    setTimeout(() => {
-        chatMessages.innerHTML += `<div class="message bot-message">${response}</div>`;
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 500);
-}
-
-async function getAIResponse(message) {
-    try {
-        const response = await fetch('/api/ai_completion', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                prompt: `User message: "${message}"
-                Respond in Hebrew as a helpful computer store customer service agent.
-                Keep the response concise and friendly.
-                
-                <typescript-interface>
-                interface Response {
-                    reply: string;
-                }
-                </typescript-interface>
-                
-                <example-response>
-                {
-                    "reply": "אשמח לעזור! המחשבים הניידים שלנו מתחילים מ-2000 ש״ח עם אחריות לשנה."
-                }
-                </example-response>`,
-                data: message
-            }),
-        });
-        
-        const data = await response.json();
-        return data.reply;
-    } catch (error) {
-        console.error('Error:', error);
-        return botResponses.default;
-    }
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-}
 </script>
 </body></html>
