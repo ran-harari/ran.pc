@@ -841,10 +841,15 @@ p {
 </head>
 <body>
 <div class="header">
+<div class="header">
     <div class="banner-container">
         <div class="banner-text">
+            <!-- שינוי כותרת -->
             <h2 class="banner-title">מבצעי חנוכה שיאירו לכם את החג!</h2>
+            
+            <!-- שינוי טקסט -->
             <p class="banner-dates">ההנחות מחכות לכם עד 31 בדצמבר!</p>
+            
             <div class="countdown-container" id="countdown">
                 <!-- ספירה לאחור תתווסף כאן באמצעות JavaScript -->
             </div>
@@ -855,10 +860,11 @@ p {
 <div class="content">
     <div style="text-align: center;">
         <div class="special-offer">
-            <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center;">מבצעי חנוכה מדהימים עד 31.12.24 !</h2>
+            <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center;">מבצעי חנוכה שיאירו לכם את החג עד 31.12.24!</h2>
+            <h3 style="font-size: 24px; margin-bottom: 10px; text-align: center;"></h3>
             <div style="font-size: 20px; margin: 15px 0; text-align: center;">
                 <p style="margin-bottom: 15px;"><strong style="display: block; text-align: center; color: #ffffff; font-size: 24px;">הטבות מיוחדות:</strong></p>
-                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי במתנה 🎁 על כל קניית מחשב נייד שבמבצע !</p>
+                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי במתנה 🎁 על כל קניית מחשב נייד שבמבצע!</p>
             </div>
         </div>
 
@@ -870,6 +876,22 @@ p {
         <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
     </div>
 </div>
+
+<style>
+    @media only screen and (max-width: 768px) {
+        .banner-title, .banner-dates, .special-offer p {
+            font-size: 18px !important; /* גודל טקסט מותאם לסלולר */
+            word-wrap: break-word; /* שבירת מילים אם הטקסט ארוך מדי */
+            margin: 0 15px; /* מרווח בצדדים */
+        }
+
+        .countdown-container {
+            margin: 15px auto; /* ריווח אוטומטי */
+            text-align: center; /* יישור למרכז */
+        }
+    }
+</style>
+
 
         <div class="products">
             <div class="product-card">
