@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
   // Add touch event handlers for mobile
-  const touchElements = document.querySelectorAll('.product-card, .social-link, .phone-icon');
+  const touchElements = document.querySelectorAll('.product-item, .social-link, .phone-icon');
   touchElements.forEach(element => {
     element.addEventListener('touchstart', function() {
       this.style.opacity = '0.7';
@@ -341,35 +341,18 @@ body {
     font-size: 10px;
   }
 
-  .products {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .products-container {
     padding: 10px;
   }
-
-  .product-card {
-    width: 100%;
-    height: auto;
-    min-height: 150px;
-    margin: 0;
-  }
-
-  .advantage-item {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-
-  .special-offer {
-    padding: 15px;
+  
+  .product-item {
+    flex: 1 1 100%;
     margin: 10px 0;
+    min-width: unset;
   }
-
-  .special-offer h2 {
-    font-size: 22px;
-  }
-
-  .special-offer p {
-    font-size: 16px;
+  
+  .product-item:hover {
+    transform: none;
   }
 
   .phone-icon-container {
@@ -412,11 +395,11 @@ body {
     font-size: 14px;
   }
 
-  .product-card h3 {
+  .product-item h3 {
     font-size: 18px;
   }
 
-  .product-card p {
+  .product-item p {
     font-size: 14px;
   }
 
@@ -436,7 +419,7 @@ body {
 }
 
 @media (hover: none) {
-  .product-card:hover {
+  .product-item:hover {
     transform: none;
   }
 
@@ -480,84 +463,43 @@ img {
     margin: 10px auto;
 }
 
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 20px;
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 20px;
+    background-color: #f4f4f4;
     max-width: 1400px;
     margin: 0 auto;
 }
 
-.product-card {
-    position: relative;
-    background-color: var(--card-background);
-    border: 1px solid rgba(30, 144, 255, 0.2);
-    box-shadow: 0 0 15px rgba(30, 144, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 300px; 
-    height: 200px; 
-    margin: 0 auto; 
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.product-item {
+    flex: 1 1 calc(33% - 20px);
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 300px;
 }
 
-.product-card:hover {
+.product-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(30, 144, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-card h3 {
-    font-size: clamp(18px, 4vw, 24px);
+.product-item h3 {
     color: var(--primary-color);
-    text-shadow: var(--neon-shadow);
-    margin-bottom: 15px;
-    text-align: center;
+    margin-bottom: 10px;
+    font-size: clamp(18px, 4vw, 24px);
 }
 
-.product-card p {
-    font-size: 1rem;
+.product-item p {
     color: var(--text-color);
-    text-align: center;
     margin-bottom: 5px;
-}
-
-.contact-section {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    padding: 25px 15px;
-    border-radius: 24px;
-    margin-top: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-}
-
-.phone-button {
-    background-color: var(--primary-color);
-    color: var(--card-background);
-    padding: 20px 30px;
-    border-radius: 50px;
-    font-size: clamp(24px, 5vw, 32px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    min-width: min(90%, 300px);
-    margin: 20px auto;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.phone-button:hover {
-    background-color: var(--secondary-color);
-}
-
-.phone-button .icon {
-    order: 1; 
-    font-size: 32px;
-    display: flex;
-    align-items: center;
+    font-size: 1rem;
 }
 
 .social-section {
@@ -673,41 +615,6 @@ img {
     .social-link:active {
         transform: scale(0.95);
     }
-}
-
-.footer {
-    background: linear-gradient(180deg, var(--card-background), var(--background-color));
-    color: var(--text-color);
-    padding: 20px 0;
-    text-align: center;
-    margin-top: 40px;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
-.footer-links {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.footer-links li {
-    display: inline;
-    margin: 0 10px;
-}
-
-.footer-links a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--secondary-color);
 }
 
 .phone-icon-container {
@@ -864,6 +771,40 @@ p {
     font-size: 18px;
 }
 
+.footer {
+    background: linear-gradient(180deg, var(--card-background), var(--background-color));
+    color: var(--text-color);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
 </style>
 </head>
 <body>
@@ -883,30 +824,11 @@ p {
 <div class="content">
     <div style="text-align: center;">
         <div class="special-offer">
-            <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center;">בונוס מיוחד לרוכשים! </h2>
-            <h3 style="font-size: 24px; margin-bottom: 10px; text-align: center;"></h3>
-            <div style="font-size: 20px; margin: 15px 0; text-align: center;">
-                <p style="margin-bottom: 15px;"><strong style="display: block; text-align: center; color: #ffffff; font-size: 24px;">הטבה מיוחדת:</strong></p>
-                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי מתקדם במתנה בקניית מחשב נייד </p>
-                <p style="text-align: center; font-size: 16px; color: #ffffff;">*בתוקף עד 31.1.2025</p>
-            </div>
-        </div>
-
-        <h1 style="color: var(--primary-color); margin-bottom: 30px; text-align: center; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 42px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">רן מחשבים פתרונות מחשוב מתקדמים</h1>
-        <p style="text-align: center; font-size: 1.4rem !important; color: #34a853; font-weight: 600; margin-bottom: 15px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">קונים מקומי – שומרים על הכלכלה הישראלית.</p>
-
-        <p style="text-align: center; font-size: 1.3rem !important; color: #34a853; font-weight: 500; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.05), rgba(52, 168, 83, 0.05)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
-
-        <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
-
-<div class="content">
-    <div style="text-align: center;">
-        <div class="special-offer">
             <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center;">בונוס מיוחד לרוכשים! 🎁</h2>
             <h3 style="font-size: 24px; margin-bottom: 10px; text-align: center;"></h3>
             <div style="font-size: 20px; margin: 15px 0; text-align: center;">
                 <p style="margin-bottom: 15px;"><strong style="display: block; text-align: center; color: #ffffff; font-size: 24px;">הטבה מיוחדת:</strong></p>
-                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי מתקדם במתנה בקניית מחשב נייד 🎁</p>
+                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי במתנה בקניית מחשב נייד שבמבצע 🎁</p>
                 <p style="text-align: center; font-size: 16px; color: #ffffff;">*בתוקף עד 31.1.2025</p>
             </div>
         </div>
@@ -918,45 +840,45 @@ p {
 
         <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
   
-      <div class="products">  
-        <div class="product-card">  
-           <h3>מחשבים ניידים</h3>  
-           <p>מגוון רחב של מחשבים ניידים מהמותגים המובילים</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>מחשבי גיימינג</h3>  
-           <p>מחשבים חזקים במיוחד למשחקים ברמה הגבוהה ביותר</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>מחשבים נייחים</h3>  
-           <p>פתרונות מחשוב מותאמים אישית לצרכי הלקוח</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>מחשבי מותג</h3>  
-           <p>DELL, ASUS, LENOVO, HP, ACER</p>  
-           <p>מחשבים מבית היצרנים המובילים בעולם</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>מסכי מחשב</h3>  
-           <p>מסכים באיכות גבוהה למשרד ולגיימינג</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>עמדות מחשב</h3>  
-           <p>עמדות מחשב נייח מושלמות לבית ולמשרד</p>  
-           <p>כולל מסך, מקלדת ועכבר</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>ציוד רשת</h3>  
-           <p>מגדילי טווח, כרטיסי רשת אלחוטיים ועוד</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>מדפסות</h3>  
-           <p>מדפסות לייזר והזרקת דיו לבית ולמשרד</p>  
-        </div>  
-        <div class="product-card">  
-           <h3>תוכנה ורישיונות</h3>  
-           <p>Windows, Office, אנטי-וירוס ופתרונות אבטחה</p>  
-        </div>  
+      <div class="products-container">  
+        <div class="product-item">
+           <h3>מחשבים ניידים</h3>
+           <p>מגוון רחב של מחשבים ניידים מהמותגים המובילים</p>
+        </div>
+        <div class="product-item">
+           <h3>מחשבי גיימינג</h3>
+           <p>מחשבים חזקים במיוחד למשחקים ברמה הגבוהה ביותר</p>
+        </div>
+        <div class="product-item">
+           <h3>מחשבים נייחים</h3>
+           <p>פתרונות מחשוב מותאמים אישית לצרכי הלקוח</p>
+        </div>
+        <div class="product-item">
+           <h3>מחשבי מותג</h3>
+           <p>DELL, ASUS, LENOVO, HP, ACER</p>
+           <p>מחשבים מבית היצרנים המובילים בעולם</p>
+        </div>
+        <div class="product-item">
+           <h3>מסכי מחשב</h3>
+           <p>מסכים באיכות גבוהה למשרד ולגיימינג</p>
+        </div>
+        <div class="product-item">
+           <h3>עמדות מחשב</h3>
+           <p>עמדות מחשב נייח מושלמות לבית ולמשרד</p>
+           <p>כולל מסך, מקלדת ועכבר</p>
+        </div>
+        <div class="product-item">
+           <h3>ציוד רשת</h3>
+           <p>מגדילי טווח, כרטיסי רשת אלחוטיים ועוד</p>
+        </div>
+        <div class="product-item">
+           <h3>מדפסות</h3>
+           <p>מדפסות לייזר והזרקת דיו לבית ולמשרד</p>
+        </div>
+        <div class="product-item">
+           <h3>תוכנה ורישיונות</h3>
+           <p>Windows, Office, אנטי-וירוס ופתרונות אבטחה</p>
+        </div>
       </div>  
   
       <div style="margin: 30px auto !important; width: 100%; max-width: 1400px; padding: 20px; background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 20px; box-shadow: 0 2px 15px rgba(0,0,0,0.05);">  
@@ -987,7 +909,7 @@ p {
             
            <a href="https://api.whatsapp.com/send/?phone=972505438095&amp;text=היי,אשמח%20לקבל%20פרטים%20נוספים" class="social-link whatsapp" target="_blank" rel="noopener noreferrer">  
               <svg viewBox="0 0 24 24" width="30" height="30">  
-                <path fill="#FFFFFF" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>  
+                <path fill="#FFFFFF" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>  
               </svg>  
            </a>  
         </div>  
@@ -998,7 +920,7 @@ p {
 <div class="phone-icon-container" onclick="togglePhoneDetails()">  
    <div class="phone-icon">  
       <svg viewBox="0 0 24 24">  
-        <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>  
+        <path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path>  
       </svg>  
    </div>  
 </div>  
