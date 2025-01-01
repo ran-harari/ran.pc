@@ -854,8 +854,168 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-</style>
+<html>
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#4CAF50">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        const endDate = new Date('2025-01-31T23:59:59').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = endDate - now;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                const countdownElement = document.getElementById('countdown');
+                if (countdownElement) {
+                    countdownElement.innerHTML = `
+                        <div class="countdown-ended">המבצע הסתיים! תודה על ההתעניינות.</div>
+                    `;
+                }
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="countdown-item">${days}<span>ימים</span></div>
+                <div class="countdown-item">${hours}<span>שעות</span></div>
+                <div class="countdown-item">${minutes}<span>דקות</span></div>
+                <div class="countdown-item">${seconds}<span>שניות</span></div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        });
+
+        function togglePhoneDetails() {
+            const details = document.getElementById('phoneDetails');
+            if (details) {
+                details.classList.toggle('show');
+            }
+        }
+
+        function callPhone() {
+            const phoneNumber = '0505438095';
+            window.location.href = `tel:${phoneNumber}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('click', function(event) {
+                const phoneIcon = document.querySelector('.phone-icon-container');
+                const phoneDetails = document.getElementById('phoneDetails');
+
+                if (phoneIcon && phoneDetails) {
+                    if (!phoneIcon.contains(event.target) && !phoneDetails.contains(event.target)) {
+                        phoneDetails.classList.remove('show');
+                    }
+                }
+            });
+
+            const phoneIcon = document.querySelector('.phone-icon-container');
+            if (phoneIcon) {
+                phoneIcon.addEventListener('touchmove', function(e) {
+                    e.preventDefault();
+                }, { passive: false });
+            }
+        });
+    </script>
+    <style>
+        :root {
+            --primary-color: #1e90ff;
+            --secondary-color: #ff7f50;
+            --background-color: #f9f9f9;
+            --text-color: #4a4a4a;
+            --card-background: #ffffff;
+        }
+
+        body {
+            direction: rtl;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .banner-container {
+            height: 350px;
+            margin: 5px auto;
+            max-width: 1400px;
+            background: linear-gradient(-45deg, var(--primary-color), var(--secondary-color));
+            overflow: hidden;
+            border-radius: 25px;
+        }
+
+        .banner-text {
+            color: white;
+            text-align: center;
+            top: 50%;
+            position: relative;
+            transform: translateY(-50%);
+            padding: 25px;
+        }
+
+        .content {
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .special-offer {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px;
+            border-radius: 20px;
+            margin: 10px auto;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 30px;
+            }
+
+            .banner-container {
+                height: 300px;
+            }
+
+            .banner-text {
+                padding: 15px;
+            }
+
+            .special-offer {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -872,23 +1032,16 @@ p {
 </div>
 
 <div class="content">
-    <div style="text-align: center;">
-        <div class="special-offer">
-            <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center;">בונוס מיוחד לרוכשים! 🎁</h2>
-            <h3 style="font-size: 24px; margin-bottom: 10px; text-align: center;"></h3>
-            <div style="font-size: 20px; margin: 15px 0; text-align: center;">
-                <p style="margin-bottom: 15px;"><strong style="display: block; text-align: center; color: #ffffff; font-size: 24px;">הטבה מיוחדת:</strong></p>
-                <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי במתנה בקניית מחשב נייד שבמבצע 🎁</p>
+    <div class="special-offer">
+        <h2>בונוס מיוחד לרוכשים! 🎁</h2>
+        <p><strong>הטבה מיוחדת:</strong></p>
+        <p>עכבר אלחוטי במתנה בקניית מחשב נייד שבמבצע 🎁</p>
+        <p>*בתוקף עד 31.1.2025</p>
+    </div>
 
-                <p style="text-align: center; font-size: 16px; color: #ffffff;">*בתוקף עד 31.1.2025</p>
-            </div>
-        </div>
-
-        <h1 style="color: var(--primary-color); margin-bottom: 30px; text-align: center; font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 42px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">רן מחשבים פתרונות מחשוב מתקדמים</h1>
-        <p style="text-align: center; font-size: 1.4rem !important; color: #34a853; font-weight: 600; margin-bottom: 15px; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">קונים מקומי – שומרים על הכלכלה הישראלית.</p>
-
-        <p style="text-align: center; font-size: 1.3rem !important; color: #34a853; font-weight: 500; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.05), rgba(52, 168, 83, 0.05)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
-
+    <h1>רן מחשבים פתרונות מחשוב מתקדמים</h1>
+    <p>קונים מקומי – שומרים על הכלכלה הישראלית.</p>
+    <p>מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
         <div class="section-title" style="text-align: center; font-size: 42px; color: var(--primary-color); margin: 30px 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">המוצרים שלנו</div>
   
       <div class="products">  
