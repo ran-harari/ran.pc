@@ -1,527 +1,559 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <base href="/">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#4CAF50">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://www.negishim.com/accessibility/accessibility_pro.js"></script>
-  <style>
-      :root {
-          --primary-color: #00f7ff;
-          --secondary-color: #ff00e1;
-          --background-color: #000000;
-          --text-color: #ffffff;
-          --card-background: #111111;
-          --neon-shadow: 0 0 10px rgba(0, 247, 255, 0.6);
-      }
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#4CAF50">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.negishim.com/accessibility/accessibility_pro.js"></script>
+    <style>
+        :root {
+            --primary-color: #00f7ff;
+            --secondary-color: #ff00e1;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --card-background: #111111;
+            --neon-shadow: 0 0 10px rgba(0, 247, 255, 0.6);
+        }
 
-      @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700&display=swap');
 
-      body {
-          direction: rtl;
-          margin: 0;
-          padding: 20px;
-          font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-          font-size: 16px;
-          line-height: 1.6;
-          background-color: var(--background-color);
-          color: var(--text-color);
-          overflow-x: hidden;
-      }
+        body {
+            direction: rtl;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
 
-      * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-      }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-      .header {
-          background-color: var(--card-background);
-          padding: 15px 20px;
-          border-radius: 8px;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-          text-align: center;
-      }
+        .header {
+            background-color: var(--card-background);
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-      .banner-container {
-          position: relative;
-          min-height: 350px;
-          margin: 5px auto;
-          max-width: 1400px;
-          border-radius: 25px;
-          overflow: hidden;
-          background: linear-gradient(-45deg, var(--primary-color), var(--secondary-color), #ff9966, var(--primary-color));
-          background-size: 400% 400%;
-          animation: gradientBG 15s ease infinite, slideInBanner 1s ease-out;
-          padding: 20px;
-      }
+        .banner-container {
+            position: relative;
+            min-height: 350px;
+            margin: 5px auto;
+            max-width: 1400px;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(-45deg, var(--primary-color), var(--secondary-color), #ff9966, var(--primary-color));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite, slideInBanner 1s ease-out;
+            padding: 2rem;
+        }
 
-      @keyframes gradientBG {
-          0% { background-position: 0% 50% }
-          50% { background-position: 100% 50% }
-          100% { background-position: 0% 50% }
-      }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
 
-      @keyframes slideInBanner {
-          from { transform: translateY(-100%); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-      }
+        @keyframes slideInBanner {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-      .banner-text {
-          position: relative;
-          z-index: 2;
-          color: white;
-          text-align: center;
-          padding: 20px;
-          animation: fadeInUp 1s ease-out;
-      }
+        .banner-text {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
 
-      @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-      .banner-title {
-          font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          font-size: clamp(32px, 5vw, 82px);
-          text-shadow: 0 0 5px var(--primary-color), 
-                       0 0 10px var(--primary-color), 
-                       0 0 15px var(--primary-color);
-          animation: neon-blink 1.5s infinite alternate;
-          margin-bottom: 20px;
-      }
+        .banner-title {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: clamp(32px, 5vw, 82px);
+            text-shadow: 0 0 5px var(--primary-color), 
+                         0 0 10px var(--primary-color), 
+                         0 0 15px var(--primary-color);
+            animation: neon-blink 1.5s infinite alternate;
+            margin-bottom: 20px;
+        }
 
-      @keyframes neon-blink {
-          0% { text-shadow: 0 0 5px var(--primary-color), 
-                           0 0 10px var(--primary-color), 
-                           0 0 15px var(--primary-color); }
-          100% { text-shadow: 0 0 15px var(--secondary-color), 
-                              0 0 30px var(--secondary-color), 
-                              0 0 40px var(--secondary-color); }
-      }
+        .banner-subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-color);
+        }
 
-      .banner-dates {
-          font-size: clamp(24px, 4vw, 52px);
-          color: #ffffff;
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-          font-weight: bold;
-          margin-top: 20px;
-          letter-spacing: 1px;
-          line-height: 1.2;
-          padding: 10px 20px;
-          background: rgba(0,0,0,0.2);
-          border-radius: 15px;
-          backdrop-filter: blur(5px);
-      }
+        @keyframes neon-blink {
+            0% { text-shadow: 0 0 5px var(--primary-color), 
+                             0 0 10px var(--primary-color), 
+                             0 0 15px var(--primary-color); }
+            100% { text-shadow: 0 0 15px var(--secondary-color), 
+                                0 0 30px var(--secondary-color), 
+                                0 0 40px var(--secondary-color); }
+        }
 
-      .countdown-container {
-          display: flex;
-          flex-direction: row-reverse;
-          justify-content: center;
-          align-items: center;
-          gap: 15px;
-          flex-wrap: wrap;
-          margin: 20px auto;
-          padding: 20px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 15px;
-          backdrop-filter: blur(5px);
-          animation: fadeIn 1s ease-out;
-      }
+        .banner-dates {
+            font-size: clamp(24px, 4vw, 52px);
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
 
-      .countdown-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          min-width: 70px; 
-          padding: 10px;
-          background: var(--primary-color);
-          color: white;
-          border-radius: 10px;
-          font-size: 20px;
-          font-weight: bold;
-          text-align: center;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          animation: pulse 1s infinite;
-      }
+        .countdown-container {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 1s ease-out;
+        }
 
-      .countdown-item span {
-          font-size: 12px;
-          margin-top: 5px;
-      }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px; 
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: pulse 1s infinite;
+        }
 
-      @keyframes pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-          100% { transform: scale(1); }
-      }
+        .countdown-item span {
+            font-size: 12px;
+            margin-top: 5px;
+        }
 
-      @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-      }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-      .content {
-          width: 100%;
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 10px;
-      }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-      .content > * {
-          margin-bottom: 20px;
-      }
+        .content {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
 
-      .section-title {
-          font-size: clamp(28px, 6vw, 42px);
-          color: var(--primary-color);
-          text-align: center;
-          margin: 30px 0 15px;
-      }
+        .content > * {
+            margin-bottom: 20px;
+        }
 
-      .special-offer {
-          background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-          color: white;
-          padding: 15px;
-          border-radius: 20px;
-          margin: 10px auto;
-      }
+        .section-title {
+            font-size: clamp(28px, 6vw, 42px);
+            color: var(--primary-color);
+            text-align: center;
+            margin: 30px 0 15px;
+        }
 
-      .products {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-          gap: 20px;
-          padding: 20px;
-          max-width: 1400px;
-          margin: 0 auto;
-      }
+        .special-offer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 90%;
+            text-align: center;
+        }
 
-      .product-card {
-          background-color: var(--card-background);
-          border-radius: 10px;
-          border: 1px solid var(--primary-color);
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
-          transition: all 0.3s ease;
-      }
+        .offer-title {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
 
-      .product-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 0 20px rgba(0, 247, 255, 0.6);
-      }
+        .offer-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
 
-      .product-card h3 {
-          color: var(--primary-color);
-          font-size: 1.5rem;
-          margin-bottom: 10px;
-      }
+        .offer-main {
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: bold;
+        }
 
-      .product-card p {
-          color: var(--text-color);
-          font-size: 1rem;
-          line-height: 1.4;
-          margin-bottom: 10px;
-      }
+        .offer-expiry {
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            color: var(--text-color);
+        }
 
-      .product-card strong {
-          color: var(--secondary-color);
-          font-weight: bold;
-      }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
 
-      .advantages-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          gap: 15px;
-          padding: 1rem;
-          margin: 0 auto;
-          max-width: 1400px; 
-          width: 100%;
-      }
+        .product-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            border: 1px solid var(--primary-color);
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+            transition: all 0.3s ease;
+        }
 
-      .advantage-item {
-          flex: 0 1 auto;
-          font-weight: bold;
-          color: var(--primary-color);
-          font-size: 1.1em;
-          padding: 12px 20px;
-          background-color: var(--card-background);
-          border: 1px solid var(--primary-color);
-          text-shadow: var(--neon-shadow);
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-          transition: background-color 0.3s ease;
-          margin: 5px;
-          white-space: nowrap;
-          text-align: center;
-      }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.6);
+        }
 
-      .advantage-item:hover {
-          background-color: var(--primary-color);
-          color: var(--card-background);
-      }
+        .product-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-      .footer {
-          background: linear-gradient(180deg, var(--card-background), var(--background-color));
-          color: var(--text-color);
-          padding: 10px 0;
-          text-align: center;
-          margin-top: 20px;
-      }
+        .product-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
 
-      .footer-content {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 15px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
+        .product-card strong {
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
 
-      .follow-title {
-          font-size: 20px;
-          color: var(--primary-color);
-          margin-bottom: 10px;
-      }
+        .advantages-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 1rem;
+            margin: 0 auto;
+            max-width: 1400px; 
+            width: 100%;
+        }
 
-      .social-icons {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin-bottom: 10px;
-      }
-      .social-link svg {
-          fill: var(--text-color);
-          transition: fill 0.3s ease;
-      }
+        .advantage-item {
+            flex: 0 1 auto;
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1em;
+            padding: 12px 20px;
+            background-color: var(--card-background);
+            border: 1px solid var(--primary-color);
+            text-shadow: var(--neon-shadow);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+            margin: 5px;
+            white-space: nowrap;
+            text-align: center;
+        }
 
-      .social-link:hover svg {
-          fill: var(--primary-color);
-      }
+        .advantage-item:hover {
+            background-color: var(--primary-color);
+            color: var(--card-background);
+        }
 
-      .copyright {
-          font-size: 12px;
-          margin-top: 5px;
-      }
+        .footer {
+            background: linear-gradient(180deg, var(--card-background), var(--background-color));
+            color: var(--text-color);
+            padding: 10px 0;
+            text-align: center;
+            margin-top: 20px;
+        }
 
-      .phone-icon-container {
-          position: fixed;
-          bottom: 20px;
-          left: 20px;  
-          z-index: 1000;
-          cursor: pointer;
-      }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-      .phone-icon {
-          width: 60px;
-          height: 60px;
-          background: var(--primary-color);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          transition: all 0.3s ease;
-          animation: pulse 2s infinite;
-      }
+        .follow-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
 
-      .phone-icon:hover {
-          transform: scale(1.1);
-          background: var(--secondary-color);
-      }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .social-link svg {
+            fill: var(--text-color);
+            transition: fill 0.3s ease;
+        }
 
-      .phone-icon svg {
-          width: 30px;
-          height: 30px;
-          fill: white;
-      }
+        .social-link:hover svg {
+            fill: var(--primary-color);
+        }
 
-      .phone-details {
-          position: fixed;
-          bottom: 90px;
-          left: 20px;
-          background: var(--background-color);
-          color: var(--text-color);
-          padding: 15px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-          z-index: 999;
-          display: none;
-          min-width: 200px;
-          text-align: center;
-      }
+        .copyright {
+            font-size: 12px;
+            margin-top: 5px;
+        }
 
-      .phone-details.show {
-          display: block;
-      }
+        .phone-icon-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;  
+            z-index: 1000;
+            cursor: pointer;
+        }
 
-      .phone-details p {
-          margin-bottom: 10px;
-          font-weight: bold;
-          font-size: 16px;
-      }
+        .phone-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
 
-      .phone-details button {
-          background: var(--primary-color);
-          color: var(--background-color);
-          border: none;
-          padding: 10px 20px;
-          border-radius: 25px;
-          cursor: pointer;
-          font-weight: bold;
-          transition: background 0.3s ease;
-          font-size: 16px;
-          width: 100%;
-          margin-top: 10px;
-      }
+        .phone-icon:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
 
-      .phone-details button:hover {
-          background: var(--secondary-color);
-      }
+        .phone-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
 
-      @keyframes rgbEffect {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-      }
+        .phone-details {
+            position: fixed;
+            bottom: 90px;
+            left: 20px;
+            background: var(--background-color);
+            color: var(--text-color);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 999;
+            display: none;
+            min-width: 200px;
+            text-align: center;
+        }
 
-      .rgb-border {
-          border: 2px solid transparent;
-          background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
-          background-size: 400% 400%;
-          animation: rgbEffect 10s ease infinite;
-          background-clip: padding-box;
-      }
+        .phone-details.show {
+            display: block;
+        }
 
-      .rgb-text {
-          background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
-          background-size: 400% 400%;
-          animation: rgbEffect 10s ease infinite;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          text-fill-color: transparent;
-      }
+        .phone-details p {
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
 
-      @media screen and (max-width: 768px) {
-          .banner-container {
-              min-height: auto;
-              padding: 15px;
-          }
+        .phone-details button {
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
 
-          .banner-title {
-              font-size: clamp(28px, 8vw, 36px);
-              margin-bottom: 10px;
-          }
-          
-          .banner-dates {
-              font-size: clamp(20px, 6vw, 24px);
-              padding: 8px 15px;
-          }
+        .phone-details button:hover {
+            background: var(--secondary-color);
+        }
 
-          .countdown-container{
-              gap: 5px;
-              padding: 10px;
-          }
+        @keyframes rgbEffect {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-          .countdown-item {
-              font-size: 14px;
-              min-width: 50px;
-              max-width: 80px;
-              padding: 6px;
-          }
+        .rgb-border {
+            border: 2px solid transparent;
+            background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            background-size: 400% 400%;
+            animation: rgbEffect 10s ease infinite;
+            background-clip: padding-box;
+        }
 
-          .countdown-item span {
-              font-size: 8px;
-          }
+        .rgb-text {
+            background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
+            background-size: 400% 400%;
+            animation: rgbEffect 10s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
 
-          .product-card {
-              width: 100%; 
-              height: auto; 
-              padding: 15px;
-          }
-          
-          .products {
-              grid-template-columns: 1fr; 
-          }
+        @media screen and (max-width: 768px) {
+            .banner-container {
+                min-height: auto;
+                padding: 15px;
+            }
 
-          .footer {
-              padding: 15px 0 5px;
-          }
+            .banner-title {
+                font-size: clamp(28px, 8vw, 36px);
+                margin-bottom: 10px;
+            }
+            
+            .banner-dates {
+                font-size: clamp(20px, 6vw, 24px);
+                padding: 8px 15px;
+            }
 
-          .follow-title {
-              font-size: 20px;
-              margin-bottom: 10px;
-          }
+            .countdown-container{
+                gap: 5px;
+                padding: 10px;
+            }
 
-          .social-icons {
-              gap: 10px;
-              margin-bottom: 10px;
-          }
+            .countdown-item {
+                font-size: 14px;
+                min-width: 50px;
+                max-width: 80px;
+                padding: 6px;
+            }
 
-          .social-link {
-              width: 35px;
-              height: 35px;
-          }
+            .countdown-item span {
+                font-size: 8px;
+            }
 
-          .copyright {
-              font-size: 12px;
-          }
-      }
+            .product-card {
+                width: 100%; 
+                height: auto; 
+                padding: 15px;
+            }
+            
+            .products {
+                grid-template-columns: 1fr; 
+            }
 
-      @media screen and (max-width: 480px) {
-          .banner-container {
-              padding: 10px;
-          }
-          
-          .banner-text {
-              padding: 10px;
-          }
-          
-          .banner-title {
-              font-size: clamp(24px, 8vw, 32px);
-          }
-          
-          .banner-dates {
-              font-size: clamp(18px, 6vw, 22px);
-              padding: 6px 12px;
-          }
+            .footer {
+                padding: 15px 0 5px;
+            }
 
-          .countdown-container {
-              gap: 5px;
-              padding: 10px;
-          }
+            .follow-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
 
-          .countdown-item {
-              font-size: 14px;
-              min-width: 50px;
-              max-width: 80px;
-              padding: 6px;
-          }
+            .social-icons {
+                gap: 10px;
+                margin-bottom: 10px;
+            }
 
-          .countdown-item span {
-              font-size: 8px;
-          }
-      }
-  </style>
+            .social-link {
+                width: 35px;
+                height: 35px;
+            }
+
+            .copyright {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .banner-container {
+                padding: 10px;
+            }
+            
+            .banner-text {
+                padding: 10px;
+            }
+            
+            .banner-title {
+                font-size: clamp(24px, 8vw, 32px);
+            }
+            
+            .banner-dates {
+                font-size: clamp(18px, 6vw, 22px);
+                padding: 6px 12px;
+            }
+
+            .countdown-container {
+                gap: 5px;
+                padding: 10px;
+            }
+
+            .countdown-item {
+                font-size: 14px;
+                min-width: 50px;
+                max-width: 80px;
+                padding: 6px;
+            }
+
+            .countdown-item span {
+                font-size: 8px;
+            }
+        }
+    </style>
 </head>
 <body>
  <div class="header">
     <div class="banner-container">
         <div class="banner-text">
-            <h2 class="banner-title">מחשבים עם AI וציוד היקפי מתקדם</h2>
-            <p class="banner-dates">פתרונות מותאמים אישית עד אליך</p>
+            <h1 class="banner-title">מחשבים עם AI וציוד היקפי מתקדם</h1>
+            <p class="banner-subtitle">פתרונות מותאמים אישית עד אליך</p>
         </div>
     </div>
 </div>
@@ -533,14 +565,10 @@
           <p style="text-align: center; font-size: 1.3rem !important; color: #34a853; font-weight: 500; margin-bottom: 25px; background: linear-gradient(45deg, rgba(26, 115, 232, 0.05), rgba(52, 168, 83, 0.05)); padding: 12px; border-radius: 8px;">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
 
           <div class="special-offer rgb-border">
-              <h2 style="font-size: 28px; margin-bottom: 20px; text-align: center; white-space: nowrap;">בונוס מיוחד לרוכשים !</h2>
-              <p style="font-size: 24px; margin-bottom: 10px; text-align: center; white-space: nowrap;">
-                   הטבה מיוחדת לזמן מוגבל ! 
-              </p>
-              <div style="font-size: 20px; margin: 15px 0; text-align: center;">
-                  <p style="text-align: center; font-size: 22px; color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 600; background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2)); padding: 12px; border-radius: 10px; margin: 15px auto; line-height: 1.5; letter-spacing: 0.5px; width: fit-content;">עכבר אלחוטי במתנה 🎁 ברכישת מחשב נייד שבמבצע !</p>
-                  <p style="text-align: center; font-size: 16px; color: #ffffff;">*בתוקף עד 28.02.2025</p>
-              </div>
+              <h2 class="offer-title">בונוס מיוחד לרוכשים !</h2>
+              <p class="offer-subtitle">הטבה מיוחדת לזמן מוגבל !</p>
+              <p class="offer-main">עכבר אלחוטי במתנה 🎁 ברכישת מחשב נייד שבמבצע !</p>
+              <p class="offer-expiry">*בתוקף עד 28.02.2025</p>
           </div>
 <div class="section-title">המוצרים והשירותים שלנו</div>
 
@@ -621,7 +649,7 @@
       </div>  
   </div>  
 
-  <div class="phone-icon-container" onclick="togglePhoneDetails()">  
+  <div class="phone-icon-container"<div class="phone-icon-container" onclick="togglePhoneDetails()">  
       <div class="phone-icon">  
           <svg viewBox="0 0 24 24">  
               <path fill="#ffffff" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>  
