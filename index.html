@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -6,11 +7,19 @@
     <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#000000">
+    <meta name="theme-color" content="#1a1a1a">
     
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-blue: #1e40af;
+            --primary-dark: #1e293b;
+            --text-white: #ffffff;
+            --text-gray: #e2e8f0;
+            --border-color: rgba(30, 64, 175, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,11 +28,52 @@
 
         body {
             font-family: 'Assistant', sans-serif;
-            background: #000;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             color: #fff;
             overflow-x: hidden;
             direction: rtl;
             line-height: 1.6;
+        }
+
+        /* Accessibility: Focus indicators */
+        *:focus {
+            outline: 3px solid #fbbf24;
+            outline-offset: 2px;
+        }
+
+        /* Accessibility: Skip to main content */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+            border-radius: 4px;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Accessibility: High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-blue: #0066cc;
+                --text-gray: #ffffff;
+                --border-color: #ffffff;
+            }
+        }
+
+        /* Accessibility: Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         .main-content {
@@ -32,356 +82,229 @@
             min-height: 100vh;
         }
 
-        #matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        #neural-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            opacity: 0.4;
-            pointer-events: none;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 120px;
-            height: 120px;
-            border: 2px solid rgba(0, 247, 255, 0.3);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10;
-            opacity: 0.3;
-            transition: all 0.1s ease;
-            background: radial-gradient(circle, rgba(0,247,255,0.1) 0%, transparent 70%);
-            animation: spin 3s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         .hero-section {
             background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
-            padding: 50px 35px;
+            padding: 30px 20px;
             text-align: center;
-            margin: 20px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            border: 4px solid rgba(59, 130, 246, 0.6);
-            min-height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(0,247,255,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,247,255,0.3) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.4;
-            animation: grid-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes grid-pulse {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 0.6; }
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .hero-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.8rem, 8vw, 4.5rem);
-            font-weight: 900;
-            margin-bottom: 25px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
-            background: linear-gradient(45deg, #ffffff, #00f7ff, #ffffff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: textShine 3s ease-in-out infinite;
-            position: relative;
-            z-index: 20;
-            line-height: 1.2;
-        }
-
-        @keyframes textShine {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hero-subtitle {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
             opacity: 0.95;
-            position: relative;
-            z-index: 20;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .content-section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 35px;
+            padding: 20px;
         }
 
         .company-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 6.5vw, 3.5rem);
-            font-weight: 900;
+            font-size: 2.2rem;
+            font-weight: 800;
             text-align: center;
-            margin: 50px 0;
+            margin: 30px 0;
             background: linear-gradient(45deg, #3b82f6, #1e40af);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.3;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .local-pride {
             text-align: center;
-            font-size: clamp(1.4rem, 4vw, 1.8rem);
-            margin: 35px 0;
-            font-weight: 800;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            font-weight: 700;
             color: #10b981;
-            background: rgba(16, 185, 129, 0.2);
-            padding: 30px;
-            border-radius: 18px;
-            border: 4px solid rgba(16, 185, 129, 0.5);
-            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.3);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .description-text {
             text-align: center;
-            font-size: clamp(1.3rem, 4vw, 1.6rem);
-            color: #e2e8f0;
-            font-weight: 700;
-            margin-bottom: 35px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 1rem;
+            color: var(--text-gray);
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         .special-offer {
             background: linear-gradient(135deg, #1e40af, #3b82f6);
-            border-radius: 22px;
-            padding: 45px;
-            margin: 45px auto;
-            max-width: 950px;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px auto;
+            max-width: 800px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            border: 4px solid rgba(59, 130, 246, 0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .special-offer h2 {
-            font-size: clamp(1.9rem, 5.5vw, 2.5rem);
-            margin-bottom: 20px;
-            font-weight: 900;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
         .special-offer p {
-            font-size: clamp(1.2rem, 3.8vw, 1.5rem);
-            margin-bottom: 18px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.4;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .section-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.1rem, 6vw, 2.8rem);
-            font-weight: 900;
+            font-size: 2rem;
+            font-weight: 800;
             text-align: center;
-            margin: 60px 0 50px 0;
+            margin: 40px 0 30px 0;
             background: linear-gradient(45deg, #3b82f6, #1e40af);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.3;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            padding: 35px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
         }
 
         .product-card {
-            background: rgba(30, 64, 175, 0.15);
-            border: 4px solid rgba(30, 64, 175, 0.5);
-            border-radius: 22px;
-            padding: 35px;
+            background: rgba(30, 64, 175, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 18px 45px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
         }
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(30, 64, 175, 0.5);
+        .product-card:hover, .product-card:focus-within {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
             border-color: #3b82f6;
-            border-width: 5px;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .product-card:hover::before {
-            transform: translateX(100%);
         }
 
         .product-title {
-            font-size: clamp(1.3rem, 3.8vw, 1.6rem);
-            margin-bottom: 22px;
-            font-weight: 900;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
             color: #3b82f6;
-            line-height: 1.3;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
 
         .product-description {
-            color: #e2e8f0;
-            line-height: 1.7;
-            margin-bottom: 22px;
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
-            text-align: center;
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
 
         .product-service {
-            background: rgba(0,0,0,0.4);
-            padding: 20px;
-            border-radius: 12px;
+            background: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 8px;
             color: #fbbf24;
-            font-weight: 700;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            text-align: center;
-            border: 3px solid rgba(251, 191, 36, 0.4);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            line-height: 1.5;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .advantages-section {
-            margin: 60px auto;
-            max-width: 1150px;
-            padding: 50px;
-            background: rgba(30, 64, 175, 0.15);
-            border-radius: 25px;
-            border: 4px solid rgba(30, 64, 175, 0.5);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            margin: 40px auto;
+            max-width: 1000px;
+            padding: 30px;
+            background: rgba(30, 64, 175, 0.1);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .advantages-title {
-            font-size: clamp(1.9rem, 5vw, 2.5rem);
-            font-weight: 900;
+            font-size: 1.8rem;
+            font-weight: 800;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             color: #3b82f6;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
         }
 
         .advantages-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 22px;
+            gap: 15px;
         }
 
         .advantage-item {
             background: linear-gradient(135deg, #1e40af, #3b82f6);
             color: white;
-            padding: 20px 35px;
-            border-radius: 32px;
-            font-weight: 800;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             cursor: pointer;
-            box-shadow: 0 12px 30px rgba(30, 64, 175, 0.4);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border: none;
         }
 
-        .advantage-item:hover {
-            transform: scale(1.08);
-            box-shadow: 0 18px 45px rgba(30, 64, 175, 0.6);
-            border-color: rgba(255, 255, 255, 0.5);
+        .advantage-item:hover, .advantage-item:focus {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
         }
 
         .phone-button {
             position: fixed;
-            bottom: 25px;
-            left: 25px;
+            bottom: 20px;
+            left: 20px;
             z-index: 100;
             cursor: pointer;
         }
 
         .phone-icon {
-            width: 75px;
-            height: 75px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #1e40af, #3b82f6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 12px 35px rgba(30, 64, 175, 0.6);
-            border: 4px solid white;
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+            border: 2px solid white;
             transition: all 0.3s ease;
         }
 
-        .phone-icon:hover {
+        .phone-icon:hover, .phone-icon:focus {
             transform: scale(1.1);
-            box-shadow: 0 18px 45px rgba(30, 64, 175, 0.8);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.6);
         }
 
         .phone-icon svg {
-            width: 38px;
-            height: 38px;
+            width: 28px;
+            height: 28px;
             fill: white;
         }
 
         .phone-details {
             position: fixed;
-            bottom: 115px;
-            left: 25px;
+            bottom: 85px;
+            left: 20px;
             background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
             color: white;
-            padding: 32px;
-            border-radius: 18px;
-            border: 4px solid rgba(30, 64, 175, 0.5);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            min-width: 290px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            min-width: 220px;
             text-align: center;
             display: none;
             z-index: 99;
@@ -400,54 +323,52 @@
         .phone-call-button {
             background: linear-gradient(135deg, #1e40af, #3b82f6);
             color: white;
-            border: 4px solid white;
-            padding: 18px 28px;
-            border-radius: 32px;
-            font-weight: 800;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            border: 2px solid white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
-            margin-top: 18px;
+            margin-top: 10px;
             width: 100%;
             transition: all 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .phone-call-button:hover {
+        .phone-call-button:hover, .phone-call-button:focus {
             transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(30, 64, 175, 0.6);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.4);
         }
 
         .professional-footer {
             background: rgba(15, 23, 42, 0.95);
-            padding: 55px 0;
+            padding: 30px 0 80px 0;
             text-align: center;
-            margin-top: 55px;
-            border-top: 4px solid rgba(30, 64, 175, 0.5);
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
         }
 
         .social-title {
-            font-size: clamp(1.7rem, 4.5vw, 2.3rem);
-            font-weight: 900;
-            margin-bottom: 32px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
             color: #3b82f6;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 28px;
-            margin-bottom: 32px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
         .social-icon {
-            width: 65px;
-            height: 65px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 4px solid white;
+            border: 2px solid white;
             transition: all 0.3s ease;
             text-decoration: none;
         }
@@ -457,477 +378,388 @@
         }
 
         .social-icon.instagram {
-            background: linear-gradient(135deg, #e91e63, #9c27b0);
+            background: linear-gradient(135deg, #e4405f, #833ab4, #c13584, #fd1d1d);
         }
 
         .social-icon.whatsapp {
             background: #25d366;
         }
 
-        .social-icon:hover {
-            transform: scale(1.15);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+        .social-icon:hover, .social-icon:focus {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
         .social-icon svg {
-            width: 32px;
-            height: 32px;
+            width: 22px;
+            height: 22px;
             fill: white;
         }
 
         .copyright {
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: #e2e8f0;
-            margin-top: 28px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.4;
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-top: 15px;
+            font-weight: 600;
+            position: relative;
+            z-index: 10;
         }
 
         /* Mobile Optimizations */
         @media (max-width: 768px) {
-            .cursor-follower {
-                display: none;
-            }
-
             .hero-section {
-                padding: 40px 25px;
-                margin: 15px;
-                min-height: 300px;
+                padding: 20px 15px;
+                margin: 5px;
             }
 
             .hero-title {
-                font-size: clamp(2.2rem, 8vw, 3.2rem);
+                font-size: 1.5rem;
+                line-height: 1.3;
             }
 
             .hero-subtitle {
-                font-size: clamp(1.4rem, 5.5vw, 2rem);
+                font-size: 1rem;
             }
 
             .company-title {
-                font-size: clamp(2.2rem, 7.5vw, 3rem);
+                font-size: 1.8rem;
+                line-height: 1.3;
+                margin: 20px 0;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+                line-height: 1.3;
+                margin: 30px 0 20px 0;
             }
 
             .products-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
-                padding: 25px 0;
+                gap: 15px;
+                padding: 15px 0;
             }
 
             .product-card {
-                padding: 28px;
+                padding: 20px;
             }
 
             .product-title {
-                font-size: clamp(1.4rem, 5vw, 1.8rem);
+                font-size: 1.2rem;
+                line-height: 1.3;
             }
 
             .product-description {
-                font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-            }
-
-            .product-service {
-                font-size: clamp(1rem, 3vw, 1.3rem);
-                padding: 18px;
+                font-size: 0.9rem;
             }
 
             .advantages-section {
-                padding: 35px 25px;
-                margin: 50px 15px;
+                padding: 20px;
+                margin: 30px 10px;
             }
 
             .advantages-grid {
                 flex-direction: column;
                 align-items: center;
-                gap: 18px;
+                gap: 10px;
             }
 
             .advantage-item {
-                font-size: clamp(1.2rem, 4vw, 1.5rem);
-                padding: 16px 28px;
+                font-size: 0.9rem;
+                padding: 10px 18px;
             }
 
             .special-offer {
-                padding: 35px 25px;
-                margin: 35px 15px;
+                padding: 20px;
+                margin: 20px 10px;
             }
 
             .special-offer h2 {
-                font-size: clamp(1.8rem, 6.5vw, 2.5rem);
+                font-size: 1.4rem;
+                line-height: 1.3;
             }
 
             .special-offer p {
-                font-size: clamp(1.2rem, 4.2vw, 1.5rem);
+                font-size: 0.9rem;
             }
 
             .local-pride {
-                font-size: clamp(1.4rem, 5vw, 1.8rem);
-                padding: 25px;
-                margin: 28px 15px;
+                font-size: 1rem;
+                padding: 12px;
+                margin: 15px 10px;
             }
 
             .description-text {
-                font-size: clamp(1.3rem, 4.8vw, 1.6rem);
-                margin: 25px 15px;
+                font-size: 0.95rem;
+                margin: 15px 10px;
             }
 
             .content-section {
-                padding: 25px 15px;
+                padding: 15px 10px;
             }
 
             .phone-button {
-                bottom: 20px;
-                left: 20px;
+                bottom: 15px;
+                left: 15px;
             }
 
             .phone-icon {
-                width: 70px;
-                height: 70px;
+                width: 50px;
+                height: 50px;
             }
 
             .phone-icon svg {
-                width: 35px;
-                height: 35px;
+                width: 24px;
+                height: 24px;
             }
 
             .phone-details {
-                bottom: 100px;
-                left: 20px;
-                min-width: 270px;
-                padding: 28px;
-            }
-
-            .phone-call-button {
-                font-size: clamp(1.2rem, 4.2vw, 1.5rem);
-                padding: 16px 24px;
-            }
-
-            .social-icons {
-                gap: 22px;
-            }
-
-            .social-icon {
-                width: 60px;
-                height: 60px;
-            }
-
-            .social-icon svg {
-                width: 30px;
-                height: 30px;
-            }
-
-            .copyright {
-                font-size: clamp(1.2rem, 3.5vw, 1.5rem);
-                padding: 0 15px;
+                bottom: 75px;
+                left: 15px;
+                min-width: 200px;
+                padding: 15px;
             }
 
             .professional-footer {
-                padding: 45px 15px;
+                padding: 25px 10px 90px 10px;
             }
 
-            .social-title {
-                font-size: clamp(1.7rem, 6vw, 2.3rem);
+            .social-icons {
+                gap: 12px;
             }
 
-            .section-title {
-                font-size: clamp(2.1rem, 7vw, 2.8rem);
+            .social-icon {
+                width: 40px;
+                height: 40px;
             }
 
-            .advantages-title {
-                font-size: clamp(1.9rem, 6.5vw, 2.5rem);
+            .social-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .copyright {
+                font-size: 0.9rem;
+                padding: 0 10px;
+                margin-bottom: 10px;
             }
         }
 
         @media (max-width: 480px) {
-            .product-title {
+            .hero-title {
                 font-size: 1.3rem;
             }
 
-            .hero-title {
-                font-size: 2rem;
-            }
-
             .company-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
 
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.4rem;
             }
 
-            .special-offer p {
+            .product-title {
                 font-size: 1.1rem;
-                line-height: 1.4;
+            }
+
+            .professional-footer {
+                padding: 20px 10px 100px 10px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="matrix-canvas"></canvas>
-    <canvas id="neural-canvas"></canvas>
-    <div class="cursor-follower" id="cursorFollower"></div>
-
+    <!-- Accessibility: Skip to main content link -->
+    <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+    
     <div class="main-content">
-        <div class="hero-section">
-            <h1 class="hero-title">מחשבים עם AI וציוד היקפי מתקדמים</h1>
+        <header class="hero-section" role="banner">
+            <h1 class="hero-title">מחשבים עם AI וציוד היקפי מתקדם</h1>
             <p class="hero-subtitle">פתרונות מותאמים אישית עד אליך</p>
-        </div>
+        </header>
 
-        <div class="content-section">
-            <h1 class="company-title">רן מחשבים - פתרונות מחשוב מתקדמים</h1>
+        <main id="main-content" class="content-section" role="main">
+            <h1 class="company-title">רן מחשבים פתרונות מחשוב מתקדמים</h1>
             
-            <p class="local-pride">
+            <section class="local-pride" role="complementary" aria-label="גאווה מקומית">
                 קונים מקומי – שומרים על הכלכלה הישראלית
-            </p>
+            </section>
             
             <p class="description-text">
                 מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים
             </p>
 
-            <div class="special-offer">
-                <h2>בונוס מיוחד לרוכשים</h2>
+            <section class="special-offer" role="region" aria-labelledby="special-offer-title">
+                <h2 id="special-offer-title">בונוס מיוחד לרוכשים</h2>
                 <p>הטבה מיוחדת לזמן מוגבל</p>
                 <p style="color: #fbbf24; font-weight: bold;">עכבר אלחוטי במתנה ברכישת מחשב נייד שבמבצע</p>
-                <p style="color: #e5e7eb; font-size: 0.85rem; line-height: 1.3;">*בתוקף עד 30.06.2025</p>
-            </div>
+                <p style="color: #e5e7eb; font-size: 0.9rem;">*בתוקף עד 30.06.2025</p>
+            </section>
 
-            <div>
-                <h2 class="section-title">המוצרים והשירותים שלנו</h2>
+            <section role="region" aria-labelledby="products-section-title">
+                <h2 id="products-section-title" class="section-title">המוצרים והשירותים שלנו</h2>
                 
-                <div class="products-grid">
-                    <div class="product-card">
-                        <h3 class="product-title">מחשבים ניידים</h3>
+                <div class="products-grid" role="grid" aria-label="רשת מוצרים ושירותים">
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="laptops-title">
+                        <h3 id="laptops-title" class="product-title">מחשבים ניידים</h3>
                         <p class="product-description">מחשבים ניידים מתקדמים מהמותגים המובילים, המותאמים לעבודה מקצועית, לימודים ופיתוח תוכנה, עם יכולת לתמוך בתוכנות כבדות ובביצועים גבוהים.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>התקנה, אופטימיזציה, סנכרון נתונים והגדרת תוכנות מתקדמות.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: התקנה, אופטימיזציה, סנכרון נתונים והגדרת תוכנות מתקדמות.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">מחשבים נייחים</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="desktops-title">
+                        <h3 id="desktops-title" class="product-title">מחשבים נייחים</h3>
                         <p class="product-description">מחשבים שולחניים איכותיים המותאמים לתחנות עבודה גרפיות, משרדים ושימושים אישיים, כולל תחנות Mini PC קומפקטיות לחיסכון במקום.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>תכנון, הרכבה מותאמת אישית ואופטימיזציה מלאה למערכות.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: תכנון, הרכבה מותאמת אישית ואופטימיזציה מלאה למערכות.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">מחשבי מותג</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="branded-title">
+                        <h3 id="branded-title" class="product-title">מחשבי מותג</h3>
                         <p class="product-description">מחשבים שולחניים מהמותגים המובילים, המשלבים אמינות וביצועים, עם אחריות מורחבת של 3 שנים.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>הגדרה ראשונית, הטמעת תוכנות, בדיקות איכות ותמיכה מלאה.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: הגדרה ראשונית, הטמעת תוכנות, בדיקות איכות ותמיכה מלאה.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">מחשבי גיימינג</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="gaming-title">
+                        <h3 id="gaming-title" class="product-title">מחשבי גיימינג</h3>
                         <p class="product-description">מחשבים עוצמתיים לגיימינג, המסוגלים להריץ משחקים ברמה הגבוהה ביותר עם גרפיקה מתקדמת וביצועים חלקים.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>התאמת פרופילים אישיים, בדיקות מאמץ ותמיכה בציוד גיימינג ייעודי.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: התאמת פרופילים אישיים, בדיקות מאמץ ותמיכה בציוד גיימינג ייעודי.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">רכיבי מחשב</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="components-title">
+                        <h3 id="components-title" class="product-title">רכיבי מחשב</h3>
                         <p class="product-description">מבחר רחב של רכיבי חומרה מתקדמים, כולל לוחות אם, מעבדים, זיכרונות וכרטיסי מסך באיכות גבוהה.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>התקנת רכיבים, עדכוני BIOS ותאימות חומרה מותאמת אישית.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: התקנת רכיבים, עדכוני BIOS ותאימות חומרה מותאמת אישית.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">אחסון ומדיה</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="storage-title">
+                        <h3 id="storage-title" class="product-title">אחסון ומדיה</h3>
                         <p class="product-description">פתרונות אחסון חדשניים הכוללים כונני SSD מהירים בנפחים גדולים ושחזור נתונים מתקדם.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>שדרוג כוננים, שחזור נתונים והתקנה מקצועית המבטיחה ביצועים מקסימליים.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: שדרוג כוננים, שחזור נתונים והתקנה מקצועית המבטיחה ביצועים מקסימליים.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">ציוד היקפי</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="peripherals-title">
+                        <h3 id="peripherals-title" class="product-title">ציוד היקפי</h3>
                         <p class="product-description">מקלדות, עכברים, אוזניות ואביזרים נוספים המתאימים לעבודה מקצועית ולגיימינג.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>הגדרה מותאמת אישית ותמיכה מלאה בציוד ההיקפי.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: הגדרה מותאמת אישית ותמיכה מלאה בציוד ההיקפי.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">תשתיות רשת אלחוטית</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="network-title">
+                        <h3 id="network-title" class="product-title">תשתיות רשת אלחוטית</h3>
                         <p class="product-description">ציוד רשת מתקדם: נתבים, סוויצ'ים, מגדילי טווח, כרטיסי רשת אלחוטיים ופתרונות Mesh. תשתיות אינטרנט חדשניות לחיבור יציב, מהיר ואמין בכל חלל הבית או העסק.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>תכנון, התקנה ופריסת רשתות אלחוטיות, כולל אבטחה ושיפור טווח הקליטה.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: תכנון, התקנה ופריסת רשתות אלחוטיות, כולל אבטחה ושיפור טווח הקליטה.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">תוכנות ורישיונות</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="software-title">
+                        <h3 id="software-title" class="product-title">תוכנות ורישיונות</h3>
                         <p class="product-description">רישוי מערכות הפעלה, תוכנות משרדיות ותוכנות לאבטחת מידע, המותאמות לצרכים אישיים או עסקיים שלך.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>התקנה, רישוי, עדכונים והגדרות מתקדמות.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: התקנה, רישוי, עדכונים והגדרות מתקדמות.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">פתרונות חשמל</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="power-title">
+                        <h3 id="power-title" class="product-title">פתרונות חשמל</h3>
                         <p class="product-description">מערכות אל-פסק (UPS), מטענים ומייצבי מתח מתקדמים לשמירה על יציבות וביצועי המערכת במצבי חירום.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>התקנה מקצועית, בדיקות עומסים והתאמה לצרכים אישיים או עסקיים שלך.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: התקנה מקצועית, בדיקות עומסים והתאמה לצרכים אישיים או עסקיים שלך.</p>
+                    </article>
 
-                    <div class="product-card">
-                        <h3 class="product-title">מדפסות</h3>
+                    <article class="product-card" role="gridcell" tabindex="0" aria-labelledby="printers-title">
+                        <h3 id="printers-title" class="product-title">מדפסות</h3>
                         <p class="product-description">מדפסות דיו ולייזר משולבות מהמותגים המובילים, המתאימות לצרכים משרדיים וביתיים, עם יכולות הדפסה, סריקה והעתקה מתקדמות.</p>
-                        <p class="product-service">שירות עד בית הלקוח או העסק:<br>פתיחת האריזה, התקנה פיזית מלאה של המדפסת, הגדרת התוכנה, וחיבור לרשת אלחוטית או קווית, להבטחת תפקוד מיטבי.</p>
-                    </div>
+                        <p class="product-service">שירות עד בית הלקוח או העסק: פתיחת האריזה, התקנה פיזית מלאה של המדפסת, הגדרת התוכנה, וחיבור לרשת אלחוטית או קווית, להבטחת תפקוד מיטבי.</p>
+                    </article>
                 </div>
-            </div>
+            </section>
 
-            <div class="advantages-section">
-                <h2 class="advantages-title">היתרונות שלנו</h2>
-                <div class="advantages-grid">
-                    <div class="advantage-item">משווק מורשה</div>
-                    <div class="advantage-item">קנייה מאובטחת</div>
-                    <div class="advantage-item">תשלומים ללא ריבית</div>
-                    <div class="advantage-item">משלוח מהיר עד הבית</div>
-                    <div class="advantage-item">אחריות יבואן רשמי</div>
+            <section class="advantages-section" role="region" aria-labelledby="advantages-title">
+                <h2 id="advantages-title" class="advantages-title">היתרונות שלנו</h2>
+                <div class="advantages-grid" role="list" aria-label="רשימת יתרונות">
+                    <button class="advantage-item" role="listitem" tabindex="0">משווק מורשה</button>
+                    <button class="advantage-item" role="listitem" tabindex="0">קנייה מאובטחת</button>
+                    <button class="advantage-item" role="listitem" tabindex="0">תשלומים ללא ריבית</button>
+                    <button class="advantage-item" role="listitem" tabindex="0">משלוח מהיר עד הבית</button>
+                    <button class="advantage-item" role="listitem" tabindex="0">אחריות יבואן רשמי</button>
                 </div>
-                <p style="text-align: center; margin-top: 25px; color: #cbd5e1; font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 600;">עד גמר המלאי | ט.ל.ח</p>
-            </div>
-        </div>
+                <p style="text-align: center; margin-top: 20px; color: #cbd5e1; font-size: 0.9rem;">עד גמר המלאי | ט.ל.ח</p>
+            </section>
+        </main>
 
-        <div class="phone-button" onclick="togglePhoneDetails()">
+        <!-- Accessibility: Phone button with proper ARIA labels -->
+        <button class="phone-button" onclick="togglePhoneDetails()" aria-label="פתח פרטי יצירת קשר" aria-expanded="false" aria-controls="phoneDetails">
             <div class="phone-icon">
-                <svg viewBox="0 0 24 24">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
                 </svg>
             </div>
+        </button>
+
+        <div id="phoneDetails" class="phone-details" role="dialog" aria-labelledby="phone-dialog-title" aria-hidden="true">
+            <p id="phone-dialog-title" style="margin-bottom: 10px; font-weight: bold; font-size: 1.1rem; color: #3b82f6;">לפרטים והזמנות</p>
+            <p style="margin-bottom: 10px; font-weight: 600;">חייגו עכשיו</p>
+            <button class="phone-call-button" onclick="callPhone()" aria-label="חייג למספר 050-5438095">050-5438095</button>
         </div>
 
-        <div id="phoneDetails" class="phone-details">
-            <p style="margin-bottom: 12px; font-weight: bold; font-size: clamp(1.4rem, 3.5vw, 1.7rem); color: #3b82f6;">לפרטים והזמנות</p>
-            <p style="margin-bottom: 12px; font-weight: 600; font-size: clamp(1.2rem, 3vw, 1.5rem);">חייגו עכשיו</p>
-            <button class="phone-call-button" onclick="callPhone()">050-5438095</button>
-        </div>
-
-        <footer class="professional-footer">
+        <footer class="professional-footer" role="contentinfo">
             <h2 class="social-title">עקבו אחרינו</h2>
-            <div class="social-icons">
-                <a href="fb://profile/ran.harari" class="social-icon facebook" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24">
+            <nav class="social-icons" role="navigation" aria-label="קישורים לרשתות חברתיות">
+                <a href="https://www.facebook.com/profile.php?id=100025416771599" class="social-icon facebook" target="_blank" rel="noopener noreferrer" aria-label="עקבו אחרינו בפייסבוק">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                 </a>
                 
-                <a href="instagram://user?username=ran_pc" class="social-icon instagram" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.07 4.85-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                <a href="https://www.instagram.com/ran_pc/" class="social-icon instagram" target="_blank" rel="noopener noreferrer" aria-label="עקבו אחרינו באינסטגרם">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
                     </svg>
                 </a>
                 
-                <a href="whatsapp://send?phone=972505438095&text=היי,%20אשמח%20לקבל%20פרטים%20נוספים" class="social-icon whatsapp" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                <a href="https://wa.me/972505438095?text=היי,אשמח%20לקבל%20פרטים%20נוספים" class="social-icon whatsapp" target="_blank" rel="noopener noreferrer" aria-label="צרו קשר בוואטסאפ">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                     </svg>
                 </a>
-            </div>
-            <p class="copyright">רן מחשבים. כל הזכויות שמורות. <strong>2025</strong></p>
+            </nav>
+            <p class="copyright">רן מחשבים. כל הזכויות שמורות. 2025</p>
         </footer>
     </div>
 
     <script>
-        const matrixCanvas = document.getElementById('matrix-canvas');
-        const matrixCtx = matrixCanvas.getContext('2d');
-
-        const resizeMatrix = () => {
-            matrixCanvas.width = window.innerWidth;
-            matrixCanvas.height = window.innerHeight;
-        };
-        resizeMatrix();
-
-        const matrixChars = '01AIתוכנהמחשב'.split('');
-        const matrixColumns = matrixCanvas.width / 20;
-        const matrixDrops = Array(Math.floor(matrixColumns)).fill(1);
-
-        const drawMatrix = () => {
-            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
-
-            matrixCtx.fillStyle = '#00ff41';
-            matrixCtx.font = '16px monospace';
-
-            for (let i = 0; i < matrixDrops.length; i++) {
-                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                matrixCtx.fillText(text, i * 20, matrixDrops[i] * 20);
-
-                if (matrixDrops[i] * 20 > matrixCanvas.height && Math.random() > 0.975) {
-                    matrixDrops[i] = 0;
-                }
-                matrixDrops[i]++;
-            }
-        };
-
-        const matrixInterval = setInterval(drawMatrix, 100);
-
-        const neuralCanvas = document.getElementById('neural-canvas');
-        const neuralCtx = neuralCanvas.getContext('2d');
-
-        const resizeNeural = () => {
-            neuralCanvas.width = window.innerWidth;
-            neuralCanvas.height = window.innerHeight;
-        };
-        resizeNeural();
-
-        const particles = [];
-        const numParticles = window.innerWidth < 768 ? 50 : 80;
-
-        for (let i = 0; i < numParticles; i++) {
-            particles.push({
-                x: Math.random() * neuralCanvas.width,
-                y: Math.random() * neuralCanvas.height,
-                dx: (Math.random() - 0.5) * 1.5,
-                dy: (Math.random() - 0.5) * 1.5,
-                size: Math.random() * 3 + 1,
-                color: ['#00f7ff', '#ff00e1', '#ff6b35'][Math.floor(Math.random() * 3)]
-            });
-        }
-
-        const drawNeural = () => {
-            neuralCtx.clearRect(0, 0, neuralCanvas.width, neuralCanvas.height);
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const distance = Math.sqrt(
-                        Math.pow(particles[i].x - particles[j].x, 2) +
-                        Math.pow(particles[i].y - particles[j].y, 2)
-                    );
-
-                    if (distance < 150) {
-                        neuralCtx.strokeStyle = `rgba(0, 247, 255, ${1 - distance / 150})`;
-                        neuralCtx.lineWidth = 1;
-                        neuralCtx.beginPath();
-                        neuralCtx.moveTo(particles[i].x, particles[i].y);
-                        neuralCtx.lineTo(particles[j].x, particles[j].y);
-                        neuralCtx.stroke();
-                    }
-                }
-            }
-
-            particles.forEach(particle => {
-                neuralCtx.fillStyle = particle.color;
-                neuralCtx.beginPath();
-                neuralCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                neuralCtx.fill();
-
-                particle.x += particle.dx;
-                particle.y += particle.dy;
-
-                if (particle.x < 0 || particle.x > neuralCanvas.width) particle.dx *= -1;
-                if (particle.y < 0 || particle.y > neuralCanvas.height) particle.dy *= -1;
-            });
-        };
-
-        const neuralInterval = setInterval(drawNeural, 50);
-
-        const handleMouseMove = (e) => {
-            const cursorFollower = document.getElementById('cursorFollower');
-            if (cursorFollower) {
-                const size = window.innerWidth < 768 ? 80 : 120;
-                cursorFollower.style.left = (e.clientX - size/2) + 'px';
-                cursorFollower.style.top = (e.clientY - size/2) + 'px';
-            }
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-
         function togglePhoneDetails() {
             const details = document.getElementById('phoneDetails');
+            const button = document.querySelector('.phone-button');
+            const isOpen = details.classList.contains('show');
+            
             details.classList.toggle('show');
+            
+            // Update ARIA attributes for accessibility
+            button.setAttribute('aria-expanded', !isOpen);
+            details.setAttribute('aria-hidden', isOpen);
         }
 
         function callPhone() {
             window.location.href = 'tel:0505438095';
         }
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            // ESC key closes phone details
+            if (event.key === 'Escape') {
+                const details = document.getElementById('phoneDetails');
+                const button = document.querySelector('.phone-button');
+                if (details.classList.contains('show')) {
+                    details.classList.remove('show');
+                    button.setAttribute('aria-expanded', 'false');
+                    details.setAttribute('aria-hidden', 'true');
+                    button.focus();
+                }
+            }
+            
+            // Enter key activates focused elements
+            if (event.key === 'Enter') {
+                const focused = document.activeElement;
+                if (focused.classList.contains('advantage-item') || 
+                    focused.classList.contains('product-card')) {
+                    focused.click();
+                }
+            }
+        });
 
         document.addEventListener('click', function(event) {
             const phoneButton = document.querySelector('.phone-button');
@@ -935,21 +767,45 @@
             
             if (!phoneButton.contains(event.target) && !phoneDetails.contains(event.target)) {
                 phoneDetails.classList.remove('show');
+                phoneButton.setAttribute('aria-expanded', 'false');
+                phoneDetails.setAttribute('aria-hidden', 'true');
             }
         });
 
-        const handleResize = () => {
-            resizeMatrix();
-            resizeNeural();
-        };
+        // Accessibility: Announce dynamic content changes to screen readers
+        function announceToScreenReader(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.style.width = '1px';
+            announcement.style.height = '1px';
+            announcement.style.overflow = 'hidden';
+            announcement.textContent = message;
+            
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
 
-        window.addEventListener('resize', handleResize);
-
-        window.addEventListener('beforeunload', () => {
-            clearInterval(matrixInterval);
-            clearInterval(neuralInterval);
-            document.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
+        // Monitor for focus changes and announce context
+        let lastFocused = null;
+        document.addEventListener('focusin', function(event) {
+            const current = event.target;
+            if (current !== lastFocused) {
+                lastFocused = current;
+                
+                if (current.classList.contains('product-card')) {
+                    const title = current.querySelector('.product-title');
+                    if (title) {
+                        announceToScreenReader(`עברת לכרטיס מוצר: ${title.textContent}`);
+                    }
+                }
+            }
         });
     </script>
 </body>
