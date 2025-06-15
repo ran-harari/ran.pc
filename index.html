@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -389,6 +390,12 @@
             text-fill-color: transparent;
         }
 
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 247, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); }
+        }
+
         @media screen and (max-width: 768px) {
             .banner-container {
                 min-height: 250px;
@@ -699,4 +706,3 @@
  <meta property="og:type" content="website">
 </body>
 </html>
-
