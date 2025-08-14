@@ -209,6 +209,11 @@
             line-height: 1.4;
             margin-bottom: 10px;
         }
+        
+        /* Make sure the last p-tag in the card has no bottom margin */
+        .product-card p:last-of-type {
+            margin-bottom: 0;
+        }
 
         .product-card strong {
             color: var(--secondary-color);
@@ -328,6 +333,11 @@
             position: relative;
             z-index: 10;
             padding: 0 2px;
+        }
+        
+        .footer p a {
+             color:#00f7ff;
+             text-decoration:underline;
         }
 
         .phone-icon-container {
@@ -503,11 +513,9 @@
                 min-height: 280px;
                 padding: 1.5rem 1rem;
                 margin: 3px auto;
-                /* --- FIX START: Center banner content --- */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                /* --- FIX END --- */
             }
 
             .banner-text {
@@ -577,9 +585,7 @@
             }
 
             .follow-title {
-                /* --- FIX START: Increase size --- */
                 font-size: 22px;
-                /* --- FIX END --- */
                 margin-bottom: 12px;
             }
 
@@ -589,23 +595,17 @@
             }
 
             .social-link {
-                /* --- FIX START: Increase size --- */
                 width: 42px;
                 height: 42px;
-                /* --- FIX END --- */
             }
 
             .social-link svg {
-                 /* --- FIX START: Increase size --- */
                 width: 24px;
                 height: 24px;
-                 /* --- FIX END --- */
             }
 
             .copyright {
-                 /* --- FIX START: Increase size --- */
                 font-size: 14px;
-                 /* --- FIX END --- */
                 margin-top: 12px;
             }
         }
@@ -643,9 +643,7 @@
 
             .special-offer {
                 padding: 1rem;
-                /* --- FIX START: Center block --- */
                 margin: 1.5rem auto;
-                /* --- FIX END --- */
             }
 
             .offer-title {
@@ -690,9 +688,7 @@
             }
 
             .follow-title {
-                 /* --- FIX START: Increase size --- */
                 font-size: 20px;
-                 /* --- FIX END --- */
                 margin-bottom: 10px;
             }
 
@@ -702,25 +698,21 @@
             }
 
             .social-link {
-                 /* --- FIX START: Increase size --- */
                 width: 40px;
                 height: 40px;
-                 /* --- FIX END --- */
             }
 
             .social-link svg {
-                 /* --- FIX START: Increase size --- */
                 width: 22px;
                 height: 22px;
-                 /* --- FIX END --- */
             }
 
             .copyright {
-                 /* --- FIX START: Increase size and padding --- */
                 font-size: 13px;
                 margin-top: 10px;
-                padding-bottom: 90px;
-                 /* --- FIX END --- */
+                /* --- FIX START: Reduce bottom padding --- */
+                padding-bottom: 25px; 
+                /* --- FIX END --- */
             }
         }
 
@@ -746,9 +738,9 @@
             }
 
             .copyright {
-                 /* --- FIX START: Increase padding --- */
-                padding-bottom: 100px;
-                 /* --- FIX END --- */
+                /* --- FIX START: Reduce bottom padding --- */
+                padding-bottom: 25px;
+                /* --- FIX END --- */
             }
         }
     </style>
@@ -818,11 +810,11 @@
         <p>מקלדות, עכברים, אוזניות ואביזרים נוספים המתאימים לעבודה מקצועית ולגיימינג.</p>
         <p><strong>שירות עד בית הלקוח או העסק:</strong> הגדרה מותאמת אישית ותמיכה מלאה בציוד ההיקפי.</p>
     </div>
- <div class="product-card">
-    <h3>תשתיות רשת אלחוטית</h3>
-    <p>ציוד רשת מתקדם: נתבים, סוויץ'ים, מגדילי טווח, כרטיסי רשת אלחוטיים ופתרונות Mesh. תשתיות אינטרנט חדשניות לחיבור יציב, מהיר ואמין בכל חללי הבית או העסק.</p>
-    <p><strong>שירות עד בית הלקוח או העסק:</strong> תכנון, התקנה ופריסת רשתות אלחוטיות, כולל אבטחה ושיפור טווח הקליטה.</p>
-</div>
+    <div class="product-card">
+        <h3>תשתיות רשת אלחוטית</h3>
+        <p>ציוד רשת מתקדם: נתבים, סוויץ'ים, מגדילי טווח, כרטיסי רשת אלחוטיים ופתרונות Mesh. תשתיות אינטרנט חדשניות לחיבור יציב, מהיר ואמין בכל חללי הבית או העסק.</p>
+        <p><strong>שירות עד בית הלקוח או העסק:</strong> תכנון, התקנה ופריסת רשתות אלחוטיות, כולל אבטחה ושיפור טווח הקליטה.</p>
+    </div>
     <div class="product-card">
         <h3>תוכנות ורישיונות</h3>
         <p>רישוי מערכות הפעלה, תוכנות משרדיות ותוכנות לאבטחת מידע, המותאמות לצרכים האישיים או העסקיים שלך.</p>
@@ -854,7 +846,6 @@
       </div>  
   </div>  
 
-  <!-- מדיניות פרטיות משופרת -->
   <section id="privacy" class="privacy-section">
     <h2 class="privacy-title">מדיניות פרטיות</h2>
     <p class="privacy-date"><strong>תאריך תחולה:</strong> 14.08.2025</p>
@@ -906,59 +897,14 @@
             </a>
         </div>
         <p class="copyright">רן מחשבים. כל הזכויות שמורות. <span style="font-weight: bold; color: white;">2025</span></p>
+        <p style="color:#aaa;font-size:0.9em;margin-top:15px;">
+            <a href="#privacy">מדיניות פרטיות</a>
+        </p>
     </div>
-  <p style="color:#aaa;font-size:0.9em;margin-top:15px;">
-האתר אינו אוסף מידע אישי ואינו משתמש בעוגיות מעקב.
-כל פנייה אלינו מתבצעת מיוזמת המשתמש בלבד.
-<a href="#privacy" style="color:#00f7ff;text-decoration:underline;">מדיניות פרטיות</a>
-</p>
 </footer>
 
   <script>
-    let countdownInterval;
-    
-    function updateCountdown() {
-        const endDate = new Date('2025-01-31T23:59:59').getTime();
-        const now = new Date().getTime();
-        const timeLeft = endDate - now;
-        
-        if (timeLeft <= 0) {
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            const countdownElement = document.getElementById('countdown');
-            if (countdownElement) {
-                countdownElement.innerHTML = `
-                    <div class="countdown-ended">המבצע הסתיים! תודה על ההתעניינות.</div>
-                `;
-            }
-            return;
-        }
-        
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(timeLeft % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        const minutes = Math.floor(timeLeft % (1000 * 60 * 60) / (1000 * 60));
-        const seconds = Math.floor(timeLeft % (1000 * 60) / 1000);
-        
-        const countdownElement = document.getElementById('countdown');
-        if (countdownElement) {
-            countdownElement.innerHTML = `
-                <div class="countdown-item">${days}<span>ימים</span></div>
-                <div class="countdown-item">${hours}<span>שעות</span></div>
-                <div class="countdown-item">${minutes}<span>דקות</span></div>
-                <div class="countdown-item">${seconds}<span>שניות</span></div>
-            `;
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
-        // התחלת הספירה לאחור אם יש אלמנט countdown
-        const countdownElement = document.getElementById('countdown');
-        if (countdownElement) {
-            countdownInterval = setInterval(updateCountdown, 1000);
-            updateCountdown();
-        }
-        
         // הטיפול בלחיצות מחוץ לאייקון הטלפון
         document.addEventListener('click', function (event) {
             const phoneIcon = document.querySelector('.phone-icon-container');
