@@ -240,7 +240,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: background-color 0.3s ease;
             margin: 5px;
-            white-space: nowrap;
             text-align: center;
         }
 
@@ -450,11 +449,9 @@
                 min-height: 280px;
                 padding: 1.5rem 1rem;
                 margin: 3px auto;
-                /* --- FIX START: Center banner content --- */
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                /* --- FIX END --- */
             }
 
             .banner-text {
@@ -510,9 +507,7 @@
             }
 
             .follow-title {
-                /* --- FIX START: Increase size --- */
                 font-size: 22px;
-                /* --- FIX END --- */
                 margin-bottom: 12px;
             }
 
@@ -522,23 +517,17 @@
             }
 
             .social-link {
-                /* --- FIX START: Increase size --- */
                 width: 42px;
                 height: 42px;
-                /* --- FIX END --- */
             }
 
             .social-link svg {
-                 /* --- FIX START: Increase size --- */
                 width: 24px;
                 height: 24px;
-                 /* --- FIX END --- */
             }
 
             .copyright {
-                 /* --- FIX START: Increase size --- */
                 font-size: 14px;
-                 /* --- FIX END --- */
                 margin-top: 12px;
             }
         }
@@ -576,9 +565,7 @@
 
             .special-offer {
                 padding: 1rem;
-                /* --- FIX START: Center block --- */
                 margin: 1.5rem auto;
-                /* --- FIX END --- */
             }
 
             .offer-title {
@@ -603,9 +590,7 @@
             }
 
             .follow-title {
-                 /* --- FIX START: Increase size --- */
                 font-size: 20px;
-                 /* --- FIX END --- */
                 margin-bottom: 10px;
             }
 
@@ -615,25 +600,19 @@
             }
 
             .social-link {
-                 /* --- FIX START: Increase size --- */
                 width: 40px;
                 height: 40px;
-                 /* --- FIX END --- */
             }
 
             .social-link svg {
-                 /* --- FIX START: Increase size --- */
                 width: 22px;
                 height: 22px;
-                 /* --- FIX END --- */
             }
 
             .copyright {
-                 /* --- FIX START: Increase size and padding --- */
                 font-size: 13px;
                 margin-top: 10px;
                 padding-bottom: 90px;
-                 /* --- FIX END --- */
             }
         }
 
@@ -654,9 +633,7 @@
             }
 
             .copyright {
-                 /* --- FIX START: Increase padding --- */
                 padding-bottom: 100px;
-                 /* --- FIX END --- */
             }
         }
     </style>
@@ -748,14 +725,17 @@
     </div>
 </div>
           <div style="margin: 30px auto !important; width: 100%; max-width: 1400px; padding: 20px; background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 20px; box-shadow: 0 2px 15px rgba(0,0,0,0.05);">  
-              <h2 style="font-size: 24px; color: var(--primary-color); margin-bottom: 20px; text-align: center;">היתרונות שלנו !</h2>  
+              <h2 style="font-size: 24px; color: var(--primary-color); margin-bottom: 20px; text-align: center;">למה לקנות אצלנו?</h2>  
               <div class="advantages-container">  
-                  <span class="advantage-item">🏆 משווק מורשה !</span>
-                  <span class="advantage-item">🔒 קנייה מאובטחת !</span>
-                
-                  <span class="advantage-item">💳 תשלומים ללא ריבית !</span>
-                  <span class="advantage-item">🚚 משלוח מהיר עד הבית !</span>
-                  <span class="advantage-item">📋 אחריות יבואן רשמי !</span>
+                  <span class="advantage-item">✔️ שירות מהיר עד הבית !</span>
+                  <span class="advantage-item">✔️ מחירים ללא תחרות !</span>
+                  <span class="advantage-item">✔️ מעל 20 שנות ניסיון !</span>
+                  <span class="advantage-item">✔️ תשלומים ללא ריבית</span>
+                  <span class="advantage-item">✔️ משווקים מורשים של כל היבואנים הרשמיים !</span>
+                  <span class="advantage-item">✔️ כל המוצרים חדשים ובאריזה מקורית !</span>
+                  <span class="advantage-item">✔️ קנייה מאובטחת !</span>
+                  <span class="advantage-item">✔️ אחריות רשמית על ידי היבואנים הרשמיים !</span>
+                  <span class="advantage-item">✔️ שירות לקוחות מקצועי ואדיב בטלפון במייל ובווטסאפ !</span>
               </div>
               <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">עד גמר המלאי | ט.ל.ח</p>  
           </div>
@@ -801,34 +781,7 @@
   </footer>
 
   <script>
-    const endDate = new Date('2025-01-31T23:59:59').getTime();
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const timeLeft = endDate - now;
-        if (timeLeft <= 0) {
-            clearInterval(countdownInterval);
-            const countdownElement = document.getElementById('countdown');
-            if (countdownElement) {
-                countdownElement.innerHTML = `
-                    <div class="countdown-ended">המבצע הסתיים! תודה על ההתעניינות.</div>
-                `;
-            }
-            return;
-        }
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(timeLeft % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        const minutes = Math.floor(timeLeft % (1000 * 60 * 60) / (1000 * 60));
-        const seconds = Math.floor(timeLeft % (1000 * 60) / 1000);
-        document.getElementById('countdown').innerHTML = `
-            <div class="countdown-item">${days}<span>ימים</span></div>
-            <div class="countdown-item">${hours}<span>שעות</span></div>
-            <div class="countdown-item">${minutes}<span>דקות</span></div>
-            <div class="countdown-item">${seconds}<span>שניות</span></div>
-        `;
-    }
     document.addEventListener('DOMContentLoaded', function () {
-        let countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown();
         document.addEventListener('click', function (event) {
             const phoneIcon = document.querySelector('.phone-icon-container');
             const phoneDetails = document.getElementById('phoneDetails');
