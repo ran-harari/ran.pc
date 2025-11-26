@@ -718,6 +718,27 @@
                 margin: 10px 3px;
             }
         }
+
+        /* ======= Targeted responsive fix for the second advantages block only ======= */
+        /* This targets an advantages-container that immediately follows another advantages-container */
+        .advantages-container + .advantages-container .advantage-item {
+            white-space: normal;         /* allow wrapping of long text */
+            word-break: break-word;
+            hyphens: auto;
+            flex: 0 1 calc(45% - 20px);  /* allow two items per row on narrow screens */
+            max-width: calc(45% - 20px);
+        }
+
+        @media screen and (max-width: 600px) {
+            .advantages-container + .advantages-container .advantage-item {
+                flex: 0 1 100%;
+                max-width: 100%;
+                font-size: 1rem;
+                padding: 10px 12px;
+            }
+        }
+        /* ======================================================================== */
+
     </style>
 <style>html { scroll-behavior: smooth; }</style>
 </head>
@@ -813,6 +834,7 @@
         <p><strong>שירות עד בית הלקוח או העסק:</strong> פתיחת האריזה, התקנה פיזית מלאה של המדפסת, הגדרת התוכנה, וחיבור לרשת אלחוטית או קווית, להבטחת תפקוד מיטבי.</p>
     </div>
 </div>
+
           <div style="margin: 30px auto !important; width: 100%; max-width: 1400px; padding: 20px; background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 20px; box-shadow: 0 2px 15px rgba(0,0,0,0.05);">  
               <h2 style="font-size: 24px; color: var(--primary-color); margin-bottom: 20px; text-align: center;">היתרונות שלנו !</h2>  
               <div class="advantages-container">  
@@ -825,6 +847,20 @@
               </div>
               <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">עד גמר המלאי | ט.ל.ח</p>  
           </div>
+
+          <!-- START: New duplicated block inserted immediately after the original block -->
+          <div style="margin: 30px auto !important; width: 100%; max-width: 1400px; padding: 20px; background: linear-gradient(135deg, #ffffff, #f8f9fa); border-radius: 20px; box-shadow: 0 2px 15px rgba(0,0,0,0.05);">  
+              <h2 style="font-size: 24px; color: var(--primary-color); margin-bottom: 20px; text-align: center;">למה לקנות אצלנו?</h2>  
+              <div class="advantages-container">  
+                  <span class="advantage-item">🏷️ מחירים ללא תחרות</span>
+                  <span class="advantage-item">🕰️ מעל 20 שנות ניסיון</span>
+                  <span class="advantage-item">📦 כל המוצרים חדשים ובאריזה מקורית</span>
+                  <span class="advantage-item">📞 שירות לקוחות מקצועי ואדיב בטלפון במייל ובווטסאפ</span>
+              </div>
+              <p style="text-align: center; margin-top: 20px; color: #666; font-size: 14px;">עד גמר המלאי | ט.ל.ח</p>  
+          </div>
+          <!-- END: New duplicated block -->
+
       </div>  
   </div>  
 
