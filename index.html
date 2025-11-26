@@ -239,7 +239,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: background-color 0.3s ease;
             margin: 5px;
-            white-space: nowrap;
+            white-space: nowrap; /* ברירת מחדל לדסקטופ - שורה אחת */
             text-align: center;
         }
 
@@ -566,11 +566,17 @@
                 font-size: clamp(0.9rem, 4vw, 1.2rem);
             }
             
-            /* תיקון לזליגת הטקסט בכפתורי היתרונות במובייל */
+            /* --- תיקון סופי לזליגת הטקסט ב'יתרונות שלנו' במובייל --- */
             .advantage-item {
-                white-space: normal;
-                width: 100%;
-                margin: 5px 0;
+                white-space: normal !important; /* מכריח את הטקסט לרדת שורה */
+                width: 100% !important; /* רוחב מלא בתוך הקונטיינר */
+                max-width: 100% !important; /* מונע חריגה החוצה */
+                height: auto !important; /* מאפשר לכפתור לגדול לגובה */
+                display: block; /* מוודא תצוגה כבלוק במובייל */
+                margin: 8px 0;
+                padding: 15px 10px; /* פדינג מותאם */
+                box-sizing: border-box; /* מבטיח שהפדינג לא יגדיל את האלמנט */
+                line-height: 1.4;
             }
 
             .footer {
