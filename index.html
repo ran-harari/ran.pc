@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,12 +33,13 @@
             --apple-ease: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Accessibility Button Position - Top Right Fixed */
+        /* Accessibility Button Position - Fixed Top Right */
         #accessibility_opener, .accessibility_pro_btn {
-            top: 20px !important;
-            right: 20px !important;
+            top: 15px !important;
+            right: 15px !important;
             left: auto !important;
             z-index: 9999 !important;
+            transform: scale(0.9); /* Slightly smaller for mobile comfort */
         }
 
         * {
@@ -53,7 +54,7 @@
             background-color: var(--bg);
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.5;
             direction: rtl;
         }
 
@@ -75,35 +76,35 @@
             background-image: 
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background-size: 40px 40px;
             opacity: 0.5;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        /* Hero Section - Apple Entrance */
+        /* Hero Section */
         .hero {
-            height: 85vh;
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 60px 10px;
         }
 
         .hero-banner {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
-            padding: 60px 30px;
-            border-radius: 40px;
-            backdrop-filter: blur(30px);
+            padding: clamp(30px, 8vw, 60px) 20px;
+            border-radius: 35px;
+            backdrop-filter: blur(20px);
             box-shadow: 0 40px 100px rgba(0,0,0,0.6);
             width: 100%;
-            max-width: 1050px;
             animation: fadeInScale 1.2s var(--apple-ease);
         }
 
@@ -116,41 +117,41 @@
             display: inline-block;
             background: rgba(var(--primary-rgb), 0.1);
             color: var(--primary);
-            padding: 8px 24px;
+            padding: 6px 18px;
             border-radius: 100px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
             border: 1px solid rgba(var(--primary-rgb), 0.3);
         }
 
         .hero-title {
             font-family: 'Heebo', sans-serif;
-            font-size: clamp(38px, 10vw, 75px);
+            font-size: clamp(32px, 8vw, 70px);
             font-weight: 900;
-            line-height: 1;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #fff 0%, #888 100%);
+            line-height: 1.1;
+            margin-bottom: 15px;
+            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: clamp(20px, 5vw, 30px);
+            font-size: clamp(18px, 4vw, 28px);
             color: var(--primary);
             font-weight: 400;
             opacity: 0.9;
         }
 
-        /* Branding Headers */
+        /* Dynamic Branding Headers */
         .rgb-heading {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(32px, 7vw, 52px);
+            font-size: clamp(26px, 6vw, 48px);
             font-weight: 900;
             text-align: center;
-            margin: 80px 0 25px;
+            margin: 60px 0 20px;
             background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff0000);
             background-size: 400%;
             -webkit-background-clip: text;
@@ -166,103 +167,93 @@
         .slogan-banner {
             background: rgba(52, 168, 83, 0.05);
             border: 1px solid rgba(52, 168, 83, 0.2);
-            padding: 25px;
-            border-radius: 25px;
+            padding: 18px;
+            border-radius: 20px;
             text-align: center;
-            margin-bottom: 50px;
+            margin: 0 auto 40px auto;
             backdrop-filter: blur(10px);
-            max-width: 900px;
-            margin-inline: auto;
+            max-width: 90%;
         }
 
-        .slogan-text { color: #34a853; font-size: clamp(1.3rem, 4.5vw, 1.8rem); font-weight: 800; }
+        .slogan-text { color: #34a853; font-size: clamp(1.1rem, 4vw, 1.6rem); font-weight: 800; line-height: 1.3; }
 
-        /* Premium Special Offer Card */
+        /* Premium Offer Card */
         .offer-card {
             background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.1), rgba(112, 0, 255, 0.15));
             border: 1.5px solid var(--primary);
-            padding: 60px 40px;
-            border-radius: 45px;
+            padding: clamp(35px, 7vw, 60px) 20px;
+            border-radius: 35px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin: 80px 0;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-            transition: transform 0.4s var(--apple-ease);
+            margin: 60px 0;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
-        .offer-card:hover { transform: scale(1.02); }
-
-        .offer-title { font-size: clamp(30px, 7vw, 45px); font-weight: 900; margin-bottom: 15px; }
+        .offer-title { font-size: clamp(26px, 6vw, 42px); font-weight: 900; margin-bottom: 10px; }
         .offer-main { 
-            font-size: clamp(22px, 5vw, 32px); 
+            font-size: clamp(18px, 4.5vw, 28px); 
             font-weight: 900; 
             background: rgba(255, 255, 255, 0.05); 
-            padding: 25px 40px; 
-            border-radius: 25px; 
+            padding: 15px 25px; 
+            border-radius: 20px; 
             display: inline-block;
-            margin: 20px 0;
+            margin: 15px 0;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Bento Grid - Pure Apple Style */
+        /* Bento Grid - Mobile Optimized */
         .bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-bottom: 100px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
         }
 
         .bento-item {
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            padding: 50px 40px;
-            border-radius: 40px;
+            padding: 40px 25px;
+            border-radius: 30px;
             backdrop-filter: blur(40px);
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: all 0.6s var(--apple-ease);
-            position: relative;
+            transition: all 0.5s var(--apple-ease);
         }
 
         .bento-item:hover {
-            background: rgba(255, 255, 255, 0.08);
             border-color: rgba(var(--primary-rgb), 0.5);
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .bento-item i {
-            width: 60px; height: 60px;
+            width: 50px; height: 50px;
             color: var(--primary);
-            margin-bottom: 25px;
-            opacity: 0.9;
+            margin-bottom: 20px;
         }
 
         .bento-item h3 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #fff;
-            letter-spacing: -0.5px;
         }
 
         .bento-item p {
-            font-size: 18px;
+            font-size: clamp(16px, 3.5vw, 18px);
             color: rgba(255,255,255,0.7);
-            margin-bottom: 20px;
-            font-weight: 300;
+            margin-bottom: 15px;
+            font-weight: 400;
         }
 
         .bento-item strong {
             color: var(--secondary);
             font-weight: 800;
-            font-size: 17px;
+            font-size: 16px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
+            padding-top: 15px;
             width: 100%;
         }
 
@@ -270,126 +261,129 @@
         .adv-box {
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            padding: 80px 40px;
-            border-radius: 50px;
+            padding: clamp(40px, 8vw, 80px) 15px;
+            border-radius: 35px;
             text-align: center;
-            margin-bottom: 100px;
+            margin-bottom: 80px;
         }
 
         .pill-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 12px;
+            margin-top: 30px;
         }
 
         .pill {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(var(--primary-rgb), 0.4);
-            padding: 18px 40px;
+            padding: 12px 24px;
             border-radius: 100px;
             font-weight: 700;
             color: var(--primary);
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             transition: all 0.3s var(--apple-ease);
         }
 
-        .pill:hover { background: var(--primary); color: #000; transform: translateY(-5px); }
-
-        /* Social Icons - Premium Original Colors */
+        /* Social Icons */
         .social-row {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 60px 0;
+            gap: 20px;
+            margin: 50px 0;
         }
 
         .social-btn {
-            width: 80px; height: 80px;
-            border-radius: 25px;
+            width: clamp(55px, 12vw, 75px);
+            height: clamp(55px, 12vw, 75px);
+            border-radius: 18px;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: 0.5s var(--apple-ease);
+            transition: 0.4s var(--apple-ease);
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255, 255, 255, 0.02);
         }
 
-        .social-btn svg { width: 40px; height: 40px; fill: #fff; }
+        .social-btn svg { width: 60%; height: 60%; fill: #fff; }
 
-        .fb-btn:hover { background: #1877F2; border-color: #1877F2; transform: translateY(-12px); box-shadow: 0 15px 30px rgba(24, 119, 242, 0.4); }
-        .wa-btn:hover { background: #25D366; border-color: #25D366; transform: translateY(-12px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
-        .ig-btn:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: #dc2743; transform: translateY(-12px); box-shadow: 0 15px 30px rgba(220, 39, 67, 0.4); }
+        .fb-btn:hover { background: #1877F2; border-color: #1877F2; transform: translateY(-8px); }
+        .wa-btn:hover { background: #25D366; border-color: #25D366; transform: translateY(-8px); }
+        .ig-btn:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border-color: #dc2743; transform: translateY(-8px); }
 
-        /* Privacy Policy Premium */
+        /* Privacy Policy Premium - FIXED CENTERING */
         .privacy-container {
             max-width: 900px;
-            margin: 60px auto;
+            margin: 40px auto;
             border: 1px solid var(--glass-border);
-            border-radius: 35px;
+            border-radius: 25px;
             overflow: hidden;
             background: rgba(255,255,255,0.01);
             text-align: center;
         }
 
         .privacy-btn {
-            padding: 30px;
+            padding: 20px;
             cursor: pointer;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* FIXED */
             align-items: center;
-            gap: 15px;
-            background: rgba(255,255,255,0.02);
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.02);
             transition: 0.4s;
+            width: 100%;
         }
 
-        .privacy-btn h3 { color: var(--primary); font-size: 26px; font-weight: 800; margin: 0; }
+        .privacy-btn h3 { color: var(--primary); font-size: clamp(20px, 5vw, 24px); font-weight: 800; margin: 0; text-align: center; }
 
         .privacy-body {
             max-height: 0;
             overflow: hidden;
-            transition: 0.8s var(--apple-ease);
+            transition: 0.6s var(--apple-ease);
             text-align: center;
-            padding: 0 40px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .privacy-body.active { max-height: 1800px; padding: 50px 40px; border-top: 1px solid var(--glass-border); }
-        .privacy-body p { margin-bottom: 20px; font-size: 19px; opacity: 0.85; width: 100%; }
+        .privacy-body.active { max-height: 1500px; padding: 35px 20px; border-top: 1px solid var(--glass-border); }
+        .privacy-body p { margin-bottom: 15px; font-size: 16px; opacity: 0.85; width: 100%; text-align: center; }
         .privacy-body a { color: var(--primary); font-weight: 800; text-decoration: none; }
 
-        /* Floating Phone - High End Action */
+        /* Floating Contact Action - DEBUGGED FOR MOBILE */
         .contact-fixed {
             position: fixed;
-            bottom: 40px;
-            left: 40px;
+            bottom: 25px;
+            left: 25px;
             z-index: 1000;
         }
 
         .contact-fab {
-            width: 85px; height: 85px;
+            width: clamp(60px, 12vw, 80px); /* Proportional scaling */
+            height: clamp(60px, 12vw, 80px);
             background: var(--primary);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 20px 50px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 242, 255, 0.4);
             cursor: pointer;
             transition: 0.4s var(--apple-ease);
         }
 
-        .contact-fab:hover { transform: scale(1.1) rotate(15deg); }
-        .contact-fab i { width: 40px; height: 40px; color: #000; }
+        .contact-fab i { width: 50%; height: 50%; color: #000; }
 
         .contact-panel {
             position: absolute;
-            bottom: 105px;
+            bottom: clamp(80px, 15vw, 100px);
             left: 0;
             background: rgba(10, 10, 15, 0.98);
-            border: 1px solid var(--primary);
-            padding: 40px;
-            border-radius: 35px;
-            width: 320px;
+            border: 1.5px solid var(--primary);
+            padding: 30px 20px;
+            border-radius: 30px;
+            width: clamp(260px, 70vw, 320px);
             backdrop-filter: blur(30px);
             display: none;
             text-align: center;
@@ -399,7 +393,7 @@
         .contact-panel.active { display: block; animation: applePop 0.5s var(--apple-ease); }
 
         @keyframes applePop {
-            from { opacity: 0; transform: translateY(40px) scale(0.9); }
+            from { opacity: 0; transform: translateY(30px) scale(0.9); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
@@ -407,30 +401,25 @@
             background: var(--primary);
             color: #000;
             border: none;
-            padding: 22px;
+            padding: 18px;
             width: 100%;
-            border-radius: 20px;
+            border-radius: 18px;
             font-weight: 900;
-            font-size: 26px;
-            margin-top: 25px;
+            font-size: clamp(22px, 5vw, 26px); /* FIXED: Readable text */
+            margin-top: 15px;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(0, 242, 255, 0.2);
-            transition: 0.3s;
         }
 
-        footer { padding: 100px 0 140px; text-align: center; border-top: 1px solid var(--glass-border); opacity: 0.6; }
-        footer p { font-size: 17px; }
+        footer { padding: 60px 0 100px; text-align: center; border-top: 1px solid var(--glass-border); opacity: 0.6; }
+        footer p { font-size: 15px; }
 
-        /* Animation utilities */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1s var(--apple-ease); }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s var(--apple-ease); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
-            .hero { height: auto; padding: 140px 0 80px; }
-            .hero-banner { border-radius: 35px; padding: 40px 20px; }
-            .bento-grid { grid-template-columns: 1fr; gap: 20px; }
-            .pill { padding: 15px 30px; font-size: 1.1rem; }
-            .contact-fab { width: 75px; height: 75px; }
+            .hero-banner { border-radius: 30px; padding: 40px 15px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .privacy-body p { font-size: 15px; }
         }
     </style>
 </head>
@@ -443,13 +432,13 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-banner">
-            <div class="hero-badge">Next Gen AI Solutions</div>
+            <div class="hero-badge">Digital Excellence</div>
             <h1 class="hero-title">מחשבים עם AI וציוד היקפי מתקדם</h1>
             <p class="hero-subtitle">שירותי מחשוב ו-AI מתקדמים לבית ולעסק</p>
         </div>
     </header>
 
-    <!-- Main Content Reveal -->
+    <!-- Main Branding Reveal -->
     <section class="reveal">
         <h2 class="rgb-heading">רן מחשבים פתרונות מחשוב מתקדמים</h2>
         
@@ -457,22 +446,22 @@
             <p class="slogan-text">קונים מקומי שומרים על הכלכלה הישראלית.</p>
         </div>
         
-        <p style="text-align: center; font-size: 1.4rem; font-weight: 400; margin-bottom: 50px; color: rgba(255,255,255,0.9);">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
+        <p style="text-align: center; font-size: 1.2rem; font-weight: 400; margin-bottom: 40px; color: rgba(255,255,255,0.9);">מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים</p>
     </section>
 
-    <!-- Special Offer - Updated Date -->
+    <!-- Special Offer - Quality Controlled Text -->
     <section class="reveal">
         <div class="offer-card">
             <h2 class="offer-title">בונוס מיוחד לרוכשים !</h2>
-            <p style="font-size: 24px; margin-bottom: 15px; color: #fff; opacity: 0.95;">הטבה מיוחדת לזמן מוגבל !</p>
+            <p style="font-size: 22px; margin-bottom: 10px; color: #fff;">הטבה מיוחדת לזמן מוגבל !</p>
             <div class="offer-main">עכבר אלחוטי במתנה 🎁 ברכישת מחשב נייד שבמבצע !</div>
-            <p style="margin-top: 25px; font-size: 16px; font-weight: bold; color: var(--primary);">*בתוקף עד 28.02.2026</p>
+            <p style="margin-top: 20px; font-size: 15px; font-weight: bold; color: var(--primary);">*בתוקף עד 28.02.2026</p>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Products Bento Section -->
     <section id="services">
-        <h2 style="text-align: center; font-size: clamp(34px, 6vw, 48px); font-weight: 900; margin: 80px 0 60px; color: var(--primary); font-family: 'Heebo';">המוצרים והשירותים שלנו</h2>
+        <h2 style="text-align: center; font-size: clamp(30px, 6vw, 45px); font-weight: 900; margin-bottom: 50px; color: var(--primary); font-family: 'Heebo';">המוצרים והשירותים שלנו</h2>
         
         <div class="bento-grid">
             <div class="bento-item reveal">
@@ -568,9 +557,9 @@
         </div>
     </section>
 
-    <!-- Advantages Section -->
-    <section class="adv-box reveal">
-        <h2 style="color: var(--primary); font-size: 36px; font-weight: 900;">היתרונות שלנו !</h2>
+    <!-- Advantages -->
+    <div class="adv-box reveal">
+        <h2 style="color: var(--primary); font-size: 32px; font-weight: 900;">היתרונות שלנו !</h2>
         <div class="pill-grid">
             <span class="pill">🔒 קנייה מאובטחת !</span>
             <span class="pill">🏆 ללא פערי תיווך !</span>
@@ -578,10 +567,10 @@
             <span class="pill">🔋 אחריות יבואן רשמי !</span>
             <span class="pill">🚚 שירות עד בית הלקוח או העסק !</span>
         </div>
-        <p style="margin-top: 40px; opacity: 0.5; font-size: 15px;">עד גמר המלאי | ט.ל.ח</p>
-    </section>
+        <p style="margin-top: 30px; opacity: 0.5; font-size: 14px;">עד גמר המלאי | ט.ל.ח</p>
+    </div>
 
-    <!-- ORIGINAL BRANDED SOCIAL BAR -->
+    <!-- Original Branded Social Icons -->
     <div class="social-row reveal">
         <a href="https://www.facebook.com/ran.harari" class="social-btn fb-btn" target="_blank" title="Facebook">
             <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -594,16 +583,16 @@
         </a>
     </div>
 
-    <!-- PRIVACY POLICY - CENTERED -->
-    <div class="privacy-wrap reveal">
-        <div class="privacy-head" onclick="togglePrivacy()">
+    <!-- PRIVACY POLICY - FIXED CENTERING & PROPORTIONS -->
+    <div class="privacy-container reveal">
+        <div class="privacy-btn" onclick="togglePrivacy()">
             <h3>מדיניות הפרטיות</h3>
-            <i data-lucide="chevron-down" id="privacy-arrow" style="color: var(--primary); transition: 0.4s var(--apple-ease);"></i>
+            <i data-lucide="chevron-down" id="privacy-icon" style="color: var(--primary); transition: 0.4s var(--apple-ease);"></i>
         </div>
         <div class="privacy-body" id="privacy-content">
             <p><strong>תאריך תחולה:</strong> 14.08.2025</p>
             <p>האתר אינו אוסף מידע אישי באופן אוטומטי ואינו משתמש בעוגיות מעקב. איננו שומרים נתונים על פעילות הגלישה שלך.</p>
-            <p>כל פנייה אלינו מתבצעת ביוזמתך בלבד (למשל, באמצעות שיחה טלפונית או הודעה ברשת חברתית), והפרטים שתבחר למסור ינוצלו אך ורק למענה לפנייתך.</p>
+            <p>כל פנייה אלינו מתבצעע ביוזמתך בלבד (למשל, באמצעות שיחה טלפונית או הודעה ברשת חברתית), והפרטים שתבחר למסור ינוצלו אך ורק למענה לפנייתך.</p>
             <p>איננו מעבירים מידע לצדדים שלישיים לצרכי שיווק. ייתכן עיבוד נתונים על ידי ספקי שירותי צד ג' (כגון ספק דוא"ל) בהתאם למדיניות שלהם.</p>
             <p>ניתן ליצור קשר בכל עת לבקשת עיון, תיקון או מחיקת מידע שנמסר, בטלפון <a href="tel:050-5438095">050-5438095</a>.</p>
             <p>אם אינך מסכים/ה למדיניות זו, אנא הימנע/י ממסירת פרטים אישיים דרך ערוצי הקשר שלנו.</p>
@@ -615,7 +604,7 @@
     </footer>
 </div>
 
-<!-- Premium Floating Contact Box -->
+<!-- Floating Contact Box - FIXED MOBILE PROPORTIONS -->
 <div class="contact-fixed">
     <div class="contact-fab" onclick="togglePopup()">
         <i data-lucide="phone"></i>
@@ -638,9 +627,9 @@
 
     function togglePrivacy() {
         const content = document.getElementById('privacy-content');
-        const arrow = document.getElementById('privacy-arrow');
+        const icon = document.getElementById('privacy-icon');
         const isOpen = content.classList.toggle('active');
-        arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+        icon.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
     }
 
     function makeCall() {
@@ -653,7 +642,7 @@
         const windowHeight = window.innerHeight;
         reveals.forEach(el => {
             const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < windowHeight - 120) {
+            if (elementTop < windowHeight - 100) {
                 el.classList.add("active");
             }
         });
@@ -676,7 +665,7 @@
     window.addEventListener('click', (e) => {
         const popup = document.getElementById('contact-popup');
         const fab = document.querySelector('.contact-fab');
-        if (!popup.contains(e.target) && !fab.contains(e.target)) {
+        if (popup && !popup.contains(e.target) && !fab.contains(e.target)) {
             popup.classList.remove('active');
         }
     });
