@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>רן מחשבים - פתרונות מחשוב ו-AI מתקדמים</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#030712">
+
+    <!-- ספריות מקוריות: תוסף הנגישות ו-jQuery המקוריים -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.negishim.com/accessibility/accessibility_pro.js"></script>
+
+    <!-- פונטים איכותיים וקריאים ביותר בעברית -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --primary-glow: rgba(0, 247, 255, 0.35);
+            --secondary: #ff00e1;
+            --secondary-glow: rgba(255, 0, 225, 0.35);
+            --accent-purple: #9333ea;
+            --advantage-green: #22c55e;
+            --advantage-green-glow: rgba(34, 197, 94, 0.25);
+            --bg-dark: #030712;
+            --bg-surface: #0b1120;
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(0, 247, 255, 0.3);
+            --text-pure: #ffffff;
+            --text-body: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-dark);
+        }
+
+        body {
+            direction: rtl;
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-pure);
+            line-height: 1.7;
+            font-size: 18px;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 247, 255, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 85% 30%, rgba(255, 0, 225, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 15% 70%, rgba(147, 51, 234, 0.06) 0%, transparent 45%),
+                linear-gradient(to bottom, #030712 0%, #080d1a 50%, #030712 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* רשת גריד עדינה ומודרנית */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .site-shell {
+            position: relative;
+            z-index: 1;
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* NAVBAR ראשי נקי של אתר 2026 */
+        .site-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(3, 7, 18, 0.78);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .nav-logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            box-shadow: 0 0 18px var(--primary-glow);
+        }
+
+        .nav-brand-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-brand-sub {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 600;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-body);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-header-wa {
+            background: #25D366;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 9px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-header-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+        }
+
+        .btn-header-call {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-highlight);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 9px 20px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-header-call:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 16px var(--primary-glow);
+        }
+
+        /* HERO SECTION - אלגנטי, מרווח, ללא עומס */
+        .hero-section {
+            padding: 65px 0 50px;
+            text-align: center;
+        }
+
+        .hero-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.35);
+            color: #4ade80;
+            font-weight: 700;
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-size: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 25px var(--advantage-green-glow);
+        }
+
+        .hero-brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(34px, 6vw, 62px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #00f7ff 15%, #d946ef 60%, #ff00e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-main-title {
+            font-size: clamp(24px, 4.5vw, 40px);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        .hero-sub-title {
+            font-size: clamp(19px, 3.2vw, 26px);
+            font-weight: 600;
+            color: #93c5fd;
+            max-width: 850px;
+            margin: 0 auto 28px;
+            line-height: 1.45;
+        }
+
+        .hero-card-highlight {
+            max-width: 820px;
+            margin: 0 auto 40px;
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid var(--border-highlight);
+            padding: 20px 32px;
+            border-radius: 20px;
+            font-size: clamp(17px, 2.4vw, 21px);
+            font-weight: 600;
+            color: #ecfeff;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-hero-wa {
+            background: #25D366;
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 800;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-wa:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-hero-call {
+            background: linear-gradient(135deg, var(--primary), #00b4d8);
+            color: #030712;
+            font-size: 19px;
+            font-weight: 900;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px var(--primary-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-call:hover {
+            transform: translateY(-3px) scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        /* PROMO SECTION - כרטיס מבצע מיוחד אלגנטי */
+        .special-offer-wrap {
+            margin: 50px auto 70px;
+            max-width: 1050px;
+        }
+
+        .special-offer-card {
+            background: linear-gradient(135deg, rgba(13, 20, 42, 0.95) 0%, rgba(26, 16, 48, 0.9) 100%);
+            border: 2px solid transparent;
+            border-image: linear-gradient(135deg, var(--primary), var(--secondary)) 1;
+            border-radius: 28px;
+            padding: clamp(30px, 5vw, 48px) clamp(20px, 4vw, 40px);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(0, 247, 255, 0.15);
+        }
+
+        .offer-badge-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), #d946ef);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 800;
+            padding: 6px 18px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .offer-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(28px, 4.5vw, 42px);
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .offer-subtitle {
+            font-size: clamp(20px, 3.2vw, 26px);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 22px;
+        }
+
+        .offer-main-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: clamp(20px, 3.5vw, 28px);
+            font-weight: 800;
+            padding: 16px 36px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .offer-expiry {
+            font-size: 16px;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* CATALOG SECTION - קטלוג המוצרים */
+        .catalog-section {
+            padding: 40px 0 80px;
+        }
+
+        .section-header-clean {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle-clean {
+            font-size: 19px;
+            color: var(--text-dim);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* סרגל בקרה לקטלוג (חיפוש וטאבים) */
+        .catalog-toolbar {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 16px 20px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            backdrop-filter: blur(14px);
+        }
+
+        .catalog-search-wrap {
+            position: relative;
+            flex: 1 1 320px;
+        }
+
+        .catalog-search-wrap i {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .catalog-search-input {
+            width: 100%;
+            background: #070c18;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            color: #ffffff;
+            padding: 13px 48px 13px 18px;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .catalog-search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 14px var(--primary-glow);
+        }
+
+        .catalog-filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-body);
+            padding: 9px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .filter-tab-btn:hover, .filter-tab-btn.active {
+            background: var(--primary);
+            color: #030712;
+            border-color: var(--primary);
+            box-shadow: 0 0 16px var(--primary-glow);
+        }
+
+        /* גריד 13 המוצרים */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            backdrop-filter: blur(14px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-highlight);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 247, 255, 0.15);
+            background: rgba(18, 27, 49, 0.85);
+        }
+
+        .product-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .product-icon-wrap {
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
+            background: rgba(0, 247, 255, 0.08);
+            border: 1.5px solid rgba(0, 247, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-icon-wrap {
+            transform: scale(1.1) rotate(4deg);
+            border-color: var(--secondary);
+            color: #ffffff;
+            background: rgba(255, 0, 225, 0.12);
+        }
+
+        .product-icon-wrap svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .product-badge-clean {
+            font-size: 12.5px;
+            font-weight: 800;
+            color: #67e8f9;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+
+        .product-card h3 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card p {
+            font-size: 17.5px;
+            color: #ffffff;
+            font-weight: 400;
+            line-height: 1.75;
+            margin-bottom: 16px;
+        }
+
+        .service-door-badge {
+            background: rgba(0, 247, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.25);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin: 12px 0 24px;
+            font-size: 16.5px;
+            line-height: 1.7;
+            color: #ffffff;
+        }
+
+        .service-door-badge strong {
+            display: block;
+            color: var(--primary);
+            font-size: 17.5px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            text-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .btn-card-order {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid var(--border-highlight);
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 16px;
+            padding: 13px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+
+        .btn-card-order:hover {
+            background: #25D366;
+            border-color: #25D366;
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ADVANTAGES SECTION - היתרונות שלנו */
+        .advantages-panel {
+            background: rgba(13, 19, 36, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 30px;
+            padding: 48px 30px;
+            margin: 60px 0;
+            text-align: center;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(14px);
+        }
+
+        .advantages-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(28px, 4.5vw, 38px);
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 35px;
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .advantages-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .advantage-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 18px;
+            padding: 14px 28px;
+            border-radius: 50px;
+            background: #070c18;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .advantage-item svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .advantage-item.adv-magenta {
+            color: #f472b6;
+            border-color: rgba(244, 114, 182, 0.4);
+        }
+
+        .advantage-item.adv-cyan {
+            color: var(--primary);
+            border-color: rgba(0, 247, 255, 0.4);
+        }
+
+        .advantage-item.adv-purple {
+            color: #c084fc;
+            border-color: rgba(192, 132, 252, 0.4);
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .advantages-note {
+            color: var(--text-dim);
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* CONVERSION & CONTACT - מודול יצירת קשר מהיר */
+        .fast-contact-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(6, 44, 40, 0.6));
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 28px;
+            padding: 45px 30px;
+            margin: 50px auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .fast-contact-card h3 {
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .fast-contact-card p {
+            font-size: 19px;
+            color: var(--text-body);
+            max-width: 650px;
+            margin: 0 auto 28px;
+        }
+
+        .fast-contact-btns {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        /* ACCORDIONS - הצהרת נגישות ומדיניות פרטיות */
+        .legal-accordion-wrap {
+            max-width: 960px;
+            margin: 40px auto;
+        }
+
+        .privacy-container {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 22px 28px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease;
+        }
+
+        .privacy-container:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .privacy-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+        }
+
+        .privacy-toggle h3 {
+            color: var(--primary);
+            font-size: clamp(20px, 3.5vw, 24px);
+            font-weight: 800;
+            width: 100%;
+            text-align: center;
+            text-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .privacy-arrow {
+            transition: transform 0.35s ease;
+            stroke: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .privacy-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), padding-top 0.4s ease;
+            color: var(--text-body);
+            text-align: center;
+        }
+
+        .privacy-content.open {
+            max-height: 1600px;
+            padding-top: 24px;
+        }
+
+        .privacy-content p {
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .privacy-content strong {
+            color: var(--secondary);
+            font-weight: 800;
+        }
+
+        .privacy-content a {
+            color: var(--primary);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            background: linear-gradient(180deg, transparent 0%, #030712 100%);
+            border-top: 1px solid var(--border-subtle);
+            padding: 50px 0 90px;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-social-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 20px 0 30px;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .social-link.facebook { background: #1877F2; }
+        .social-link.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .social-link.whatsapp { background: #25D366; }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.1);
+            border-color: #ffffff;
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        .copyright {
+            font-size: 16px;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        /* כפתור טלפון צף למחשב */
+        .phone-icon-container {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .phone-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--primary), #00b4d8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px var(--primary-glow);
+            transition: all 0.3s ease;
+        }
+
+        .phone-icon:hover {
+            transform: scale(1.1);
+            background: var(--secondary);
+            box-shadow: 0 10px 35px var(--secondary-glow);
+        }
+
+        .phone-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: #000000;
+        }
+
+        .phone-icon:hover svg {
+            fill: #ffffff;
+        }
+
+        .phone-details {
+            position: fixed;
+            bottom: 110px;
+            left: 30px;
+            background: rgba(13, 20, 38, 0.98);
+            color: #ffffff;
+            padding: 22px;
+            border-radius: 20px;
+            border: 1.5px solid var(--primary);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px var(--primary-glow);
+            z-index: 999;
+            display: none;
+            min-width: 250px;
+            text-align: center;
+            backdrop-filter: blur(14px);
+        }
+
+        .phone-details.show {
+            display: block;
+        }
+
+        .phone-details p {
+            margin-bottom: 8px;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .phone-details .phone-call-btn {
+            background: linear-gradient(135deg, var(--primary), #00b4d8);
+            color: #000;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 12px;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .phone-details .phone-copy-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 15px;
+            width: 100%;
+            margin-top: 10px;
+            display: block;
+            text-align: center;
+        }
+
+        .phone-details .phone-copy-btn.copied {
+            background: #10b981;
+            border-color: #10b981;
+            color: #000;
+        }
+
+        /* סרגל פעולה דביק לסלולר (Mobile Quick Bar) */
+        .mobile-sticky-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(3, 7, 18, 0.95);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border-highlight);
+            padding: 10px 16px;
+            z-index: 999;
+        }
+
+        .mobile-sticky-actions {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .mobile-sticky-btn {
+            flex: 1;
+            padding: 12px 14px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .mobile-sticky-btn.wa {
+            background: #25D366;
+            color: #ffffff;
+        }
+
+        .mobile-sticky-btn.call {
+            background: linear-gradient(135deg, var(--primary), #00b4d8);
+            color: #000000;
+        }
+
+        @media (max-width: 860px) {
+            .nav-links { display: none; }
+            .phone-icon-container, .phone-details { display: none !important; }
+            .mobile-sticky-bar { display: block; }
+            .site-footer { padding-bottom: 95px; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR ראשי אלגנטי לשנת 2026 -->
+<nav class="site-nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">
+            <div class="nav-logo-icon">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div>
+                <div class="nav-brand-title">רן מחשבים</div>
+                <span class="nav-brand-sub">פתרונות מחשוב ו-AI מתקדמים</span>
+            </div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#special-offer">מבצע מיוחד</a></li>
+            <li><a href="#services">המוצרים והשירותים שלנו</a></li>
+            <li><a href="#advantages">היתרונות שלנו</a></li>
+            <li><a href="#contact">צור קשר</a></li>
+        </ul>
+
+        <div class="nav-cta-group">
+            <a href="https://wa.me/972505438095?text=היי%20רן,%20אשמח%20לקבל%20פרטים%20וייעוץ" class="btn-header-wa" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>וואטסאפ מהיר</span>
+            </a>
+            <a href="tel:+972505438095" class="btn-header-call">
+                <i class="fa-solid fa-phone"></i>
+                <span>050-5438095</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="site-shell">
+
+    <!-- HERO SECTION - נקי, יוקרתי, פותח את האתר בעוצמה -->
+    <header class="hero-section">
+        <div>
+            <span class="hero-badge-pill">
+                <i class="fa-solid fa-shield-halved"></i>
+                קונים מקומי שומרים על הכלכלה הישראלית.
+            </span>
+        </div>
+
+        <h1 class="hero-brand-name">רן מחשבים פתרונות מחשוב מתקדמים</h1>
+        <h2 class="hero-main-title">מחשבים עם AI וציוד היקפי מתקדם</h2>
+        <p class="hero-sub-title">פתרונות מחשוב ו-AI מתקדמים לבית ולעסק</p>
+
+        <div class="hero-card-highlight">
+            מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים
+        </div>
+
+        <div class="hero-actions">
+            <a href="https://wa.me/972505438095?text=שלום%20רן,%20אשמח%20לייעוץ%20להתאמת%20מחשב%20או%20שירות%20AI" class="btn-hero-wa" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>ייעוץ מקצועי בוואטסאפ</span>
+            </a>
+            <a href="tel:+972505438095" class="btn-hero-call">
+                <i class="fa-solid fa-phone"></i>
+                <span>חייגו: 050-5438095</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- מודול המבצע המיוחד -->
+    <section id="special-offer" class="special-offer-wrap">
+        <div class="special-offer-card">
+            <span class="offer-badge-tag">הטבה מיוחדת</span>
+            <h2 class="offer-title">בונוס מיוחד לרוכשים !</h2>
+            <p class="offer-subtitle">הטבה מיוחדת לזמן מוגבל !</p>
+            <div>
+                <span class="offer-main-box">עכבר אלחוטי במתנה 🎁 ברכישת מחשב נייד שבמבצע !</span>
+            </div>
+            <p class="offer-expiry">*בתוקף עד 30.09.2026</p>
+        </div>
+    </section>
+
+    <!-- קטלוג 13 המוצרים והשירותים -->
+    <main id="services" class="catalog-section">
+        <div class="section-header-clean">
+            <h2 class="section-title">המוצרים והשירותים שלנו</h2>
+            <p class="section-subtitle-clean">בחרו קטגוריה או חפשו מוצר לקבלת ייעוץ והזמנה מהירה:</p>
+        </div>
+
+        <div class="catalog-toolbar">
+            <div class="catalog-search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="catalogSearch" class="catalog-search-input" placeholder="חיפוש מוצר או שירות (לדוגמה: גיימינג, AI, רשתות, מסכים...)" oninput="filterProducts()">
+            </div>
+
+            <div class="catalog-filter-tabs">
+                <button type="button" class="filter-tab-btn active" onclick="setCategory('all', this)">הכל (13)</button>
+                <button type="button" class="filter-tab-btn" onclick="setCategory('ai', this)">שירותי AI</button>
+                <button type="button" class="filter-tab-btn" onclick="setCategory('computers', this)">מחשבים</button>
+                <button type="button" class="filter-tab-btn" onclick="setCategory('hardware', this)">חומרה ואחסון</button>
+                <button type="button" class="filter-tab-btn" onclick="setCategory('network', this)">רשת וציוד היקפי</button>
+                <button type="button" class="filter-tab-btn" onclick="setCategory('office', this)">תוכנות, חשמל ומדפסות</button>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsContainer">
+
+            <!-- 1. שירותי AI -->
+            <div class="product-card" data-category="ai" data-keywords="ai בינה מלאכותית סרטונים סוכנים פודקאסטים תמונות">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9.5 2A3.5 3.5 0 006 5.5c0 .3 0 .6.1.9A3 3 0 003 9.5 3 3 0 004.5 12 3 3 0 003 14.5 3 3 0 006 17.5v.5A3.5 3.5 0 009.5 21.5"/>
+                                <path d="M9.5 2v19.5"/>
+                                <path d="M14.5 2A3.5 3.5 0 0118 5.5c0 .3 0 .6-.1.9A3 3 0 0121 9.5 3 3 0 0119.5 12 3 3 0 0121 14.5 3 3 0 0118 17.5v.5a3.5 3.5 0 01-3.5 3.5"/>
+                                <path d="M14.5 2v19.5"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">AI מתקדם</span>
+                    </div>
+                    <h3>שירותי AI</h3>
+                    <p>שירותי בינה מלאכותית מתקדמים ליצירת סרטוני AI, סוכני AI מותאמים אישית, דפי נחיתה ממוקדים, יצירת ספרים דיגיטליים לילדים, חידונים ומחקרי עומק.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        הפקת פודקאסטים לפי נושא, פיתוח אפליקציות מבוססות AI ויצירת תמונות תדמית, כולל שיפור תמונות, יצירת דמויות והחלפת רקעים בהתאמה אישית.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20שירותי%20AI" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי שירותי AI</span>
+                </a>
+            </div>
+
+            <!-- 2. מחשבים ניידים -->
+            <div class="product-card" data-category="computers" data-keywords="מחשבים ניידים לפטופ עבודה לימודים תוכנות כבדות">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="10" rx="1"/>
+                                <path d="M2 18h20l-1.5-3h-17z"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">מותגים מובילים</span>
+                    </div>
+                    <h3>מחשבים ניידים</h3>
+                    <p>מחשבים ניידים מתקדמים מהמותגים המובילים, המותאמים לעבודה מקצועית, ללימודים ופיתוח תוכנה, עם יכולת לתמוך בתוכנות כבדות ולספק ביצועים גבוהים.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התקנה, אופטימיזציה, סנכרון נתונים והגדרת תוכנות מתקדמות.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מחשבים%20ניידים" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מחשבים ניידים</span>
+                </a>
+            </div>
+
+            <!-- 3. מחשבים נייחים -->
+            <div class="product-card" data-category="computers" data-keywords="מחשבים נייחים שולחני גרפיקה mini pc משרד">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="12" height="9" rx="1"/>
+                                <path d="M6 21h6M9 17v4"/>
+                                <rect x="16" y="4" width="6" height="16" rx="1"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">עוצמה וקומפקטיות</span>
+                    </div>
+                    <h3>מחשבים נייחים</h3>
+                    <p>מחשבים שולחניים איכותיים המותאמים לתחנות עבודה גרפיות, משרדים ושימושים אישיים, כולל תחנות Mini PC קומפקטיות לחיסכון במקום.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        תכנון, הרכבה מותאמת אישית ואופטימיזציה מלאה למערכות.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מחשבים%20נייחים" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מחשבים נייחים</span>
+                </a>
+            </div>
+
+            <!-- 4. מחשבי מותג -->
+            <div class="product-card" data-category="computers" data-keywords="מחשבי מותג שולחניים 3 שנים אחריות מורחבת">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="10" rx="1"/>
+                                <path d="M2 18h20l-1.5-3h-17z"/>
+                                <path d="M9 9h2M9 12h4"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">3 שנות אחריות</span>
+                    </div>
+                    <h3>מחשבי מותג</h3>
+                    <p>מחשבים שולחניים מהמותגים המובילים, המשלבים אמינות וביצועים, עם אחריות מורחבת של 3 שנים.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        הגדרה ראשונית, הטמעת תוכנות, בדיקות איכות ותמיכה מלאה.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מחשבי%20מותג" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מחשבי מותג</span>
+                </a>
+            </div>
+
+            <!-- 5. מחשבי גיימינג -->
+            <div class="product-card" data-category="computers" data-keywords="מחשבי גיימינג משחקים ביצועים גרפיקה">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="8" width="20" height="10" rx="5"/>
+                                <path d="M7 11v4M5 13h4"/>
+                                <circle cx="16" cy="12" r="0.5"/>
+                                <circle cx="18" cy="14" r="0.5"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">ביצועי קצה</span>
+                    </div>
+                    <h3>מחשבי גיימינג</h3>
+                    <p>מחשבים עוצמתיים לגיימינג, המסוגלים להריץ משחקים ברמה הגבוהה ביותר עם גרפיקה מתקדמת וביצועים חלקים.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התאמת פרופילים אישיים, בדיקות מאמץ ותמיכה בציוד גיימינג ייעודי.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מחשבי%20גיימינג" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מחשבי גיימינג</span>
+                </a>
+            </div>
+
+            <!-- 6. רכיבי מחשב -->
+            <div class="product-card" data-category="hardware" data-keywords="רכיבי מחשב לוחות אם מעבדים כרטיסי מסך זיכרונות bios">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="6" width="12" height="12" rx="1"/>
+                                <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">חומרה מובחרת</span>
+                    </div>
+                    <h3>רכיבי מחשב</h3>
+                    <p>מבחר רחב של רכיבי חומרה מתקדמים, כולל לוחות אם, מעבדים, זיכרונות וכרטיסי מסך איכותיים.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התקנת רכיבים, עדכוני BIOS ותיאום חומרה מותאם אישי.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20רכיבי%20מחשב" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי רכיבי מחשב</span>
+                </a>
+            </div>
+
+            <!-- 7. אחסון ומדיה -->
+            <div class="product-card" data-category="hardware" data-keywords="אחסון ומדיה כונני ssd שחזור נתונים">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="6" rx="1"/>
+                                <rect x="3" y="14" width="18" height="6" rx="1"/>
+                                <path d="M7 7h.01M7 17h.01"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">מהירות ואבטחה</span>
+                    </div>
+                    <h3>אחסון ומדיה</h3>
+                    <p>פתרונות אחסון חדשניים הכוללים כונני SSD מהירים בנפחים גדולים ושחזור נתונים מתקדם.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        שדרוג כוננים, שחזור נתונים והתקנה מקצועית המבטיחה ביצועים מקסימליים.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20אחסון%20ומדיה" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי אחסון ומדיה</span>
+                </a>
+            </div>
+
+            <!-- 8. מסכים -->
+            <div class="product-card" data-category="network" data-keywords="מסכים רזולוציות צבע כיול גיימינג עריכה">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="13" rx="1"/>
+                                <path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">דיוק צבע</span>
+                    </div>
+                    <h3>מסכים</h3>
+                    <p>מסכי מחשב ברזולוציות גבוהות עם תמיכה בטכנולוגיות צבע מתקדמות, המתאימים לעבודה מקצועית, גיימינג ועריכת תוכן.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התקנה מקצועית וכיול מסכים לפי צרכים מותאמים אישית.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מסכים" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מסכים</span>
+                </a>
+            </div>
+
+            <!-- 9. ציוד היקפי -->
+            <div class="product-card" data-category="network" data-keywords="ציוד היקפי מקלדות עכברים אוזניות">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 14v-2a9 9 0 0118 0v2"/>
+                                <path d="M21 14a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3z"/>
+                                <path d="M3 14a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">ארגונומיה</span>
+                    </div>
+                    <h3>ציוד היקפי</h3>
+                    <p>מקלדות, עכברים, אוזניות ואביזרים נוספים המתאימים לעבודה מקצועית ולגיימינג.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        הגדרה מותאמת אישית ותמיכה מלאה בציוד ההיקפי.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20ציוד%20היקפי" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי ציוד היקפי</span>
+                </a>
+            </div>
+
+            <!-- 10. תשתיות רשת אלחוטית -->
+            <div class="product-card" data-category="network" data-keywords="תשתיות רשת אלחוטית נתבים סוויצ'ים מגדילי טווח mesh">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12.5a11 11 0 0114 0"/>
+                                <path d="M8 16a6 6 0 018 0"/>
+                                <circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">קליטה מושלמת</span>
+                    </div>
+                    <h3>תשתיות רשת אלחוטית</h3>
+                    <p>ציוד רשת מתקדם: נתבים, סוויצ'ים, מגדילי טווח, כרטיסי רשת אלחוטיים ופתרונות Mesh. תשתיות אינטרנט חדשניות לחיבור יציב, מהיר ואמין בכל חלל הבית או העסק.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        תכנון, התקנה ופריסת רשתות אלחוטיות, כולל אבטחה ושיפור טווח הקליטה.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20תשתיות%20רשת%20אלחוטית" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי רשתות</span>
+                </a>
+            </div>
+
+            <!-- 11. תוכנות ורישיונות -->
+            <div class="product-card" data-category="office" data-keywords="תוכנות ורישיונות מערכות הפעלה אבטחת מידע office">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">רישוי רשמי</span>
+                    </div>
+                    <h3>תוכנות ורישיונות</h3>
+                    <p>רישוי מערכות הפעלה, תוכנות משרדיות ותוכנות לאבטחת מידע, המותאמות לצרכים האישיים או העסקיים שלך.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התקנה, רישוי, עדכונים והגדרות מתקדמות.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20תוכנות%20ורישיונות" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי תוכנות</span>
+                </a>
+            </div>
+
+            <!-- 12. פתרונות חשמל -->
+            <div class="product-card" data-category="office" data-keywords="פתרונות חשמל אל-פסק ups מטענים מייצבי מתח">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">הגנה ויציבות</span>
+                    </div>
+                    <h3>פתרונות חשמל</h3>
+                    <p>מערכות אל-פסק (UPS), מטענים ומייצבי מתח מתקדמים לשמירה על יציבות וביצועי המערכת במצבי חירום.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        התקנה מקצועית, בדיקות עומסים והתאמה לצרכים האישיים או העסקיים שלך.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20פתרונות%20חשמל" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי פתרונות חשמל</span>
+                </a>
+            </div>
+
+            <!-- 13. מדפסות -->
+            <div class="product-card" data-category="office" data-keywords="מדפסות דיו לייזר משולבות סריקה הדפסה">
+                <div>
+                    <div class="product-card-top">
+                        <div class="product-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M6 9V3h12v6"/>
+                                <path d="M6 18H4a1 1 0 01-1-1v-6a1 1 0 011-1h16a1 1 0 011 1v6a1 1 0 01-1 1h-2"/>
+                                <rect x="6" y="14" width="12" height="7"/>
+                            </svg>
+                        </div>
+                        <span class="product-badge-clean">דיו ולייזר משולבות</span>
+                    </div>
+                    <h3>מדפסות</h3>
+                    <p>מדפסות דיו ולייזר משולבות מהמותגים המובילים, המתאימות לצרכים משרדיים וביתיים, עם יכולות הדפסה, סריקה והעתקה מתקדמות.</p>
+                    <div class="service-door-badge">
+                        <strong>שירות עד בית הלקוח או העסק:</strong>
+                        פתיחת האריזה, התקנה פיזית מלאה של המדפסת, הגדרת התוכנה, וחיבור לרשת אלחוטית או קווית, להבטחת תפקוד מיטבי.
+                    </div>
+                </div>
+                <a href="https://wa.me/972505438095?text=היי%20רן,%20אני%20מעוניין%20בפרטים%20וייעוץ%20בנושא:%20מדפסות" class="btn-card-order" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>הזמן או התייעץ לגבי מדפסות</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- היתרונות שלנו -->
+    <section id="advantages" class="advantages-panel">  
+        <h2 class="advantages-title">היתרונות שלנו !</h2>  
+        <div class="advantages-container">  
+            <span class="advantage-item adv-magenta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg> 
+                קנייה מאובטחת !
+            </span>
+            <span class="advantage-item adv-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="5" x2="5" y2="19"/>
+                    <circle cx="6.5" cy="6.5" r="2.5"/>
+                    <circle cx="17.5" cy="17.5" r="2.5"/>
+                </svg> 
+                ללא פערי תיווך !
+            </span>
+            <span class="advantage-item adv-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                </svg> 
+                תשלומים ללא ריבית !
+            </span>
+            <span class="advantage-item adv-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/>
+                </svg> 
+                אחריות יבואן רשמי !
+            </span>
+            <span class="advantage-item adv-magenta">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 11l9-8 9 8"/>
+                    <path d="M5 10v10h14V10"/>
+                </svg> 
+                שירות עד בית הלקוח או העסק !
+            </span>
+        </div>
+        <p class="advantages-note">עד גמר המלאי | ט.ל.ח</p>  
+    </section>
+
+    <!-- מודול יצירת קשר והזמנות -->
+    <section id="contact" class="fast-contact-card">
+        <h3>לפרטים והזמנות</h3>
+        <p>חייגו אלינו 📞 לקבלת ייעוץ אישי, שירות מקצועי ואספקה עד בית הלקוח או העסק.</p>
+        <div class="fast-contact-btns">
+            <a href="https://wa.me/972505438095?text=היי%20רן,%20אשמח%20לקבל%20הצעת%20מחיר%20וייעוץ" class="btn-hero-wa" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>שיחה מהירה בוואטסאפ</span>
+            </a>
+            <a href="tel:+972505438095" class="btn-hero-call">
+                <i class="fa-solid fa-phone"></i>
+                <span>חייגו: 050-5438095</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- אקורדיונים של מדיניות פרטיות והצהרת נגישות -->
+    <div class="legal-accordion-wrap">
+        <!-- מדיניות הפרטיות -->
+        <div class="privacy-container">
+            <div id="privacy-toggle" class="privacy-toggle" tabindex="0" role="button" aria-expanded="false" aria-controls="privacy-content">
+                <h3>מדיניות הפרטיות</h3>
+                <svg id="privacy-arrow" class="privacy-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div id="privacy-content" class="privacy-content">
+                <p><strong>תאריך תחולה:</strong> 14.08.2025</p>
+                <p>האתר אינו אוסף מידע אישי באופן אוטומטי ואינו משתמש בעוגיות מעקב. איננו שומרים נתונים על פעילות הגלישה שלך.</p>
+                <p>כל פנייה אלינו מתבצעת ביוזמתך בלבד (למשל, באמצעות שיחה טלפונית או הודעה ברשת חברתית), והפרטים שתבחר למסור ינוצלו אך ורק למענה לפנייתך.</p>
+                <p>איננו מעבירים מידע לצדדים שלישיים לצרכי שיווק. ייתכן עיבוד נתונים על ידי ספקי שירותי צד ג' (כגון ספק דוא"ל) בהתאם למדיניות שלהם.</p>
+                <p>ניתן ליצור קשר בכל עת לבקשת עיון, תיקון או מחיקת מידע שנמסר, בטלפון <a href="tel:+972505438095">050-5438095</a>.</p>
+                <p>אם אינך מסכים/ה למדיניות זו, אנא הימנע/י ממסירת פרטים אישיים דרך ערוצי הקשר שלנו.</p>
+            </div>
+        </div>
+
+        <!-- הצהרת נגישות -->
+        <div class="privacy-container">
+            <div id="accessibility-toggle" class="privacy-toggle" tabindex="0" role="button" aria-expanded="false" aria-controls="accessibility-content">
+                <h3>הצהרת נגישות</h3>
+                <svg id="accessibility-arrow" class="privacy-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+            <div id="accessibility-content" class="privacy-content">
+                <p>אנו ב"רן מחשבים" רואים חשיבות עליונה במתן שירות שוויוני, נגיש ומכיל לכלל הגולשים. אתר זה הונגש במטרה לאפשר חווית גלישה נוחה לכולם.</p>
+                <p><strong>רמת הנגישות באתר:</strong> האתר הונגש בהתאם להנחיות הנגישות לתכנים באינטרנט (WCAG 2.0) ברמת AA, ובהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות.</p>
+                <p><strong>אמצעי הנגישות המיושמים:</strong> האתר מותאם לניווט מקלדת, מותאם לקוראי מסך (כולל תגיות לכל האייקונים), בעל ניגודיות צבעים תקינה, וכולל תוסף נגישות מתקדם לשליטה בתצוגה.</p>
+                <p><strong>יצירת קשר עם רכז הנגישות:</strong><br>
+                אם נתקלתם בבעיה, נשמח לעזור!<br>
+                שם: רן הררי<br>
+                טלפון: <a href="tel:+972505438095">050-5438095</a><br>
+                דוא"ל: <a href="mailto:rajaram@012.net.il">rajaram@012.net.il</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="site-shell">
+        <h3 style="font-family: 'Montserrat', sans-serif; font-size: 24px; color: var(--primary); margin-bottom: 16px; font-weight: 800;">עקבו אחרינו</h3>
+        <div class="footer-social-wrap">
+            <a href="https://www.facebook.com/ran.harari" class="social-link facebook" target="_blank" rel="noopener noreferrer" aria-label="פייסבוק">
+                <svg viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/ran_pc/" id="instagram-link" class="social-link instagram" target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.40z"/>
+                </svg>
+            </a>
+            <a href="https://wa.me/972505438095?text=היי,אשמח%20לקבל%20פרטים%20נוספים" class="social-link whatsapp" target="_blank" rel="noopener noreferrer" aria-label="וואטסאפ">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+            </a>
+        </div>
+        <p class="copyright">רן מחשבים. כל הזכויות שמורות. <span style="font-weight: bold; color: white;">2026</span></p>
+    </div>
+</footer>
+
+<!-- כפתור טלפון צף למחשב -->
+<div class="phone-icon-container" tabindex="0" role="button" aria-label="פתח פרטי התקשרות">  
+    <div class="phone-icon">  
+        <svg viewBox="0 0 24 24">  
+            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>  
+        </svg>  
+    </div>  
+</div>  
+
+<div id="phoneDetails" class="phone-details">
+    <p>לפרטים והזמנות</p>
+    <p>חייגו אלינו <span style="color: #ef4444;">📞</span></p>
+    <a href="tel:+972505438095" class="phone-call-btn">050-5438095</a>
+    <button type="button" class="phone-copy-btn" onclick="copyPhoneNumber(this)">העתק מספר</button>
+</div>
+
+<!-- סרגל פעולה דביק לסלולר (Mobile Quick Bar) -->
+<div class="mobile-sticky-bar">
+    <div class="mobile-sticky-actions">
+        <a href="https://wa.me/972505438095?text=היי%20רן,%20אשמח%20לקבל%20פרטים%20וייעוץ" class="mobile-sticky-btn wa" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+            <span>וואטסאפ מהיר</span>
+        </a>
+        <a href="tel:+972505438095" class="mobile-sticky-btn call">
+            <i class="fa-solid fa-phone"></i>
+            <span>חייגו: 050-5438095</span>
+        </a>
+    </div>
+</div>
+
+<script>
+    let activeCategory = 'all';
+
+    function setCategory(category, btnEl) {
+        activeCategory = category;
+        document.querySelectorAll('.filter-tab-btn').forEach(btn => btn.classList.remove('active'));
+        if (btnEl) btnEl.classList.add('active');
+        filterProducts();
+    }
+
+    function filterProducts() {
+        const query = (document.getElementById('catalogSearch').value || '').trim().toLowerCase();
+        const cards = document.querySelectorAll('.product-card');
+
+        cards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            const cardKeywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+            const cardText = card.innerText.toLowerCase();
+
+            const matchCat = (activeCategory === 'all') || (cardCat === activeCategory);
+            const matchQuery = !query || cardKeywords.includes(query) || cardText.includes(query);
+
+            if (matchCat && matchQuery) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function togglePhoneDetails() {
+        const details = document.getElementById('phoneDetails');
+        if (details) {
+            details.classList.toggle('show');
+        }
+    }
+
+    function copyPhoneNumber(btnEl) {
+        var number = '050-5438095';
+
+        function showCopied() {
+            if (!btnEl) return;
+            var orig = btnEl.textContent;
+            btnEl.textContent = 'הועתק! ✓';
+            btnEl.classList.add('copied');
+            setTimeout(function() {
+                btnEl.textContent = orig;
+                btnEl.classList.remove('copied');
+            }, 2000);
+        }
+
+        try {
+            var textarea = document.createElement('textarea');
+            textarea.value = number;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showCopied();
+        } catch(e) {
+            // גיבוי
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // אינסטגרם מותאם לאפליקציה במובייל
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        var instaLink = document.getElementById("instagram-link");
+        if (isMobile && instaLink) {
+            instaLink.href = "instagram://user?username=ran_pc";
+            instaLink.removeAttribute("target");
+        }
+
+        // סגירת חלונית טלפון במחשב בלחיצה בחוץ
+        document.addEventListener('click', function(event) {
+            const phoneIcon = document.querySelector('.phone-icon-container');
+            const phoneDetails = document.getElementById('phoneDetails');
+            if (phoneIcon && phoneDetails) {
+                if (!phoneIcon.contains(event.target) && !phoneDetails.contains(event.target)) {
+                    phoneDetails.classList.remove('show');
+                }
+            }
+        });
+
+        const phoneIcon = document.querySelector('.phone-icon-container');
+        if (phoneIcon) {
+            phoneIcon.addEventListener('click', togglePhoneDetails);
+        }
+
+        // אקורדיון מדיניות פרטיות
+        const privacyToggle = document.getElementById('privacy-toggle');
+        const privacyContent = document.getElementById('privacy-content');
+        const privacyArrow = document.getElementById('privacy-arrow');
+        if (privacyToggle && privacyContent && privacyArrow) {
+            privacyToggle.addEventListener('click', () => {
+                const isOpen = privacyContent.classList.contains('open');
+                if (isOpen) {
+                    privacyContent.classList.remove('open');
+                    privacyArrow.style.transform = 'rotate(0deg)';
+                    privacyToggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    privacyContent.classList.add('open');
+                    privacyArrow.style.transform = 'rotate(180deg)';
+                    privacyToggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+
+        // אקורדיון הצהרת נגישות
+        const accessibilityToggle = document.getElementById('accessibility-toggle');
+        const accessibilityContent = document.getElementById('accessibility-content');
+        const accessibilityArrow = document.getElementById('accessibility-arrow');
+        if (accessibilityToggle && accessibilityContent && accessibilityArrow) {
+            accessibilityToggle.addEventListener('click', () => {
+                const isOpen = accessibilityContent.classList.contains('open');
+                if (isOpen) {
+                    accessibilityContent.classList.remove('open');
+                    accessibilityArrow.style.transform = 'rotate(0deg)';
+                    accessibilityToggle.setAttribute('aria-expanded', 'false');
+                } else {
+                    accessibilityContent.classList.add('open');
+                    accessibilityArrow.style.transform = 'rotate(180deg)';
+                    accessibilityToggle.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+    });
+</script>
+
+<meta property="og:title" content="רן מחשבים - פתרונות מחשוב ו-AI מתקדמים">
+<meta property="og:description" content="מגוון רחב של מוצרי מחשוב באיכות גבוהה ובמחירים אטרקטיביים">
+<meta property="og:image" content="https://example.com/path-to-your-logo-image.jpg">
+<meta property="og:url" content="https://www.rancomputers.co.il">
+<meta property="og:type" content="website">
+</body>
+</html>
